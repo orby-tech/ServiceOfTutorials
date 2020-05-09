@@ -1,0 +1,28 @@
+@import  'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+
+.App {
+  text-align: center;
+}
+
+.start__global{
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+.start__ol{
+
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+
+.catalog_global-level {
+  display: inline-block;
+  margin: 20px;  
+}
+
+.catalog_first-level{
+  display: inline-block;
+  margin: 10px;
+}

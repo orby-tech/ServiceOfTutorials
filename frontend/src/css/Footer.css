@@ -1,0 +1,27 @@
+.footer {
+	margin-top: 40px;
+	width: 100%;
+}
+.footer__link {
+	display: inline-block;
+	width: auto;
+	margin-left: 30px;
+	border: 1px solid #7FFFD4;
+	border-radius: 6px;
+	padding: 8px;
+}
+.footer__about {
+	display: inline-block;
+	width: auto;
+	margin-left: 30px;
+	padding: 8px;
+}
+.footer__author {
+	display: inline-block;
+	width: auto;
+	margin-left: 30px;
+	border: 1px solid black;
+	border-radius: 6px;
+	padding: 8px;
+}
+
