@@ -26,3 +26,26 @@
   display: inline-block;
   margin: 10px;
 }
+
+.article__code {
+ text-align: left;
+ padding: 30px;
+ color:  yellow;
+ background-color: rgb(47, 79, 79);
+ border-radius: 5px;
+}
+.article__text {
+  font-size: 120%;
+  padding: 15px; 
+}
+.article__header {
+  font-size: 180%;
+}
+.article__link {
+  
+}
+.article__container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}

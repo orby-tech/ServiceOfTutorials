@@ -11,13 +11,26 @@ class Catalog extends Component{
     super(props);
 
     this.state = {
-      catalog: [["Front-end", ['React', [['First Article', "11111111111"], ['Second Article']]], 
-                              ['Redux', [['First Article'], ['Second Article']]]],
-                ["Back-end", ['NodeJS', [['First Article'], ['Second Article']]], 
-                              ['Django', [['First Article'], ['Second Article']]]]]
-    };
+      catalog: []
+    }
   }
-
+  componentDidMount(){
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    fetch('http://127.0.0.1:8000/allcatalog', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        this.setState({
+          catalog: result
+        })
+      })
+  }
   render() {
 
     return(   
