@@ -16,9 +16,9 @@ class Article extends Component{
   }
   componentDidMount(){
     const { match: { params } } = this.props;
-    this.setState({opend: params.pk});
+
     var myHeaders = new Headers();
-    var raw = JSON.stringify({"id":"11111111111"});
+    var raw = JSON.stringify({"id": params.pk});
     myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
       method: 'POST',
@@ -37,16 +37,25 @@ class Article extends Component{
   }
 
   styleOfArticle(key) {
-    if (key === "code") {
-      return "article__code"
-    } else if(key === "text"){
-      return "article__text"
-    } else if(key === "link"){
-      return "article__link"
-    } else if(key === "header"){
-      return "article__header"
+    if (key[1] === "code") {
+      return  (<div key={key} className="article__code">
+                {key[0]}
+              </div>)
+    } else if(key[1] === "text"){
+      return (<div key={key} className="article__text">
+                {key[0]}
+              </div>)
+    } else if(key[1] === "link"){
+      return (<div key={key} className="article__link">
+                <a href={key[2]}> {key[0]}</a>
+              </div>)
+    } else if(key[1] === "header"){
+      return (<div key={key} className="article__header">
+                {key[0]}
+              </div>)
     }
   }
+
 
   componentDidUpdate(prevProps) {
     const { match: { params } } = this.props;
@@ -61,9 +70,7 @@ class Article extends Component{
       <div className="article__container">
         { 
           this.state.article.map( moment  =>
-            <div key={moment} className={this.styleOfArticle(moment[1])}>
-              {moment[0]}
-            </div>
+            this.styleOfArticle(moment)
           )
         }
       </div>

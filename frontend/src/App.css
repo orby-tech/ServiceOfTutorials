@@ -42,10 +42,30 @@
   font-size: 180%;
 }
 .article__link {
-  
+  font-size: 120%;
+  text-align: right;
+  padding: 10px;
+  color:  yellow;
+  background-color: rgba(205, 133, 63, 0.5);
+  border-radius: 5px;
 }
 .article__container {
   margin-left: auto;
   margin-right: auto;
-  width: 600px;
+  max-width: 600px;
+}
+.create-article__container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+
+.create-article__type-new-block-no-link {
+  display: none;
+}
+.create-article__type-new-block-link {
+
+}
+.create-article__non-display {
+  display: none;
 }

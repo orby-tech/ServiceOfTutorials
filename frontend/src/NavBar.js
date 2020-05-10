@@ -83,6 +83,12 @@ class NavBar extends Component{
                         className="nav-link"
                         to="/newarticles"> Новые статьи
                   </Link>
+                </li>                  
+                <li className="nav-item" id="navBar">
+                  <Link onClick={this.toggleNavbar} 
+                        className="nav-link"
+                        to="/CreateArticle"> Написать статью
+                  </Link>
                 </li>                                    
               </ul>
             </div>
