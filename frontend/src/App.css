@@ -28,11 +28,11 @@
 }
 
 .article__code {
- text-align: left;
- padding: 30px;
- color:  yellow;
- background-color: rgb(47, 79, 79);
- border-radius: 5px;
+  text-align: left;
+  padding: 30px;
+  color:  yellow;
+  background-color: rgb(47, 79, 79);
+  border-radius: 5px;
 }
 .article__text {
   font-size: 120%;
@@ -54,18 +54,67 @@
   margin-right: auto;
   max-width: 600px;
 }
+
+
 .create-article__container {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
-}
-
-.create-article__type-new-block-no-link {
-  display: none;
 }
 .create-article__type-new-block-link {
 
 }
 .create-article__non-display {
   display: none;
+}
+
+.create-article__create-button {
+  height: 38px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+}
+.create-article__uppend-button{
+  height: 38px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+  margin-top: 50px;
+}
+.create-article__input {
+  margin-bottom: 10px;
+}
+.create-article__editButton {
+  float:right;
+  height: 20px;
+  width: 20px;
+
+  margin-top: 15px;
+}
+
+.create-article__delButton {
+  float:right;
+  height: 20px;
+  width: 20px;
+
+  margin-top: 15px;
+}
+.create-article__edit-delete {
+}
+.create-article__block {
+  width: 90%;
+  float: left;
+}
+.create-article__article-element {
+  border: 1px solid gray;
+  display: block;
+}
+.create-article__redaction-article-block {
+  margin:40px;
+  border: 3px solid black;
+  border-radius: 10px;
 }
