@@ -19,6 +19,7 @@ class Article extends Component{
 
     var myHeaders = new Headers();
     var raw = JSON.stringify({"id": params.pk});
+    console.log(params.pk)
     myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
       method: 'POST',

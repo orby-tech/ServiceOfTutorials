@@ -5,6 +5,13 @@ var MongoClient = require('mongodb').MongoClient;
 var urldb = "mongodb://localhost:27017/";
 
 
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+
+
 function build (opts) {
   const fastify = Fastify(opts)
 
@@ -122,7 +129,48 @@ function build (opts) {
           })
       }
     })
+    fastify.route({
+      method: 'POST',
+      url: '/createarticle',
+      handler: (req, reply) => {
+        let id = getRandomInt(111111111111111111)
+        let tutorial = {
+          id: id.toString(),
+          article: req.body.article
+        }        
+        console.log(tutorial)
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            let indexes = []
+            for (let i=0; i<result[0].catalog.length; i++){
+              if(result[0].catalog[i][0] === req.body.type){
+                for (let j=1; j<result[0].catalog[i].length; j++){   
+                  if(result[0].catalog[i][j][0] === req.body.under_type){
+                    result[0].catalog[i][j][1].push(["new state", id, "unmod"])
+                    MongoClient.connect(urldb)
+                      .then((db) => db.db("tutorialsdb"))
+                      .then((dbo) => {
+                        dbo.collection("tutorials").insertOne(tutorial)
+                        dbo.collection("allcatalog").deleteOne({})
+                        dbo.collection("allcatalog").insertOne(result[0])
 
+                        })
+                      .catch((err) => { console.log(err, "err")})
+                      .then((result_last) => {
+                        reply.send("finded")
+                      })
+                  }
+                }
+              }
+            }
+          })
+
+
+      }
+    })
   }
 
   return fastify

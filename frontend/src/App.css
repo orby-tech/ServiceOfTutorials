@@ -26,7 +26,24 @@
   display: inline-block;
   margin: 10px;
 }
-
+.catalog__second-level-unmod {
+  opacity: .3;
+}
+.catalog__finded-style {
+  background-color: yellow;
+}
+.catalog__header-find-group{
+  display: inline-block;
+  width: 200px;
+}
+.catalog__input-find-group{
+  display: inline-block;
+  width: 200px ;
+}
+.catalog__button-find-group{
+  display: inline-block;
+  width: 100px;
+}
 .article__code {
   text-align: left;
   padding: 30px;

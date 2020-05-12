@@ -24,7 +24,7 @@ class CreateArticle extends Component{
     this.addBlock = this.addBlock.bind(this)
     this.deleteElement = this.deleteElement.bind(this)
     this.temp_type_change = this.temp_type_change.bind(this)
-
+    this.publicateArticle = this.publicateArticle.bind(this)
 
     this.state = {
       catalog:  [],
@@ -199,6 +199,34 @@ class CreateArticle extends Component{
       return "create-article__type-new-block-link form-control create-article__input"
     } else {
       return "create-article__non-display"
+    }
+  }
+  publicateArticle(){
+
+    if (this.state.new_article[0][1] != "header") {
+      alert("Статья должна начинаться с Заголовока")
+    } else{
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "type": this.state.first_value,
+        "under_type": this.state.second_value.toString(),
+        "article": this.state.new_article
+      });
+      console.log(raw)
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("http://127.0.0.1:8000/createarticle", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
   }
 
