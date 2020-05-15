@@ -41,6 +41,7 @@ class TopArticles extends Component{
             )
         )
         arr.sort(sortfunction)
+        arr.reverse()
         console.log(arr)
         self.setState({NewArticles: arr})
     });
@@ -90,7 +91,7 @@ class TopArticles extends Component{
     } else return(   
       <div className="catalog">
 
-        <h1> Новые статьи </h1>
+        <h1> Популярные статьи: </h1>
           <div className="catalog__header-find-group"> Найти в каталоге:</div>
           <input className="form-control catalog__input-find-group"
                   id="catalog__input-find-group"/>

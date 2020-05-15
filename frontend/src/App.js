@@ -8,6 +8,7 @@ import  NavBar  from './NavBar'
 import  Footer  from './Footer'
 import  Catalog  from './Catalog'
 import  NewArticles  from './NewArticlesList'
+import  TopArticles  from './TopArticlesList'
 import  Article  from './Article'
 import  Admin  from './Admin'
 import  CreateArticle  from './CreateArticle'
@@ -26,7 +27,8 @@ function App() {
 
           <Route path="/" exact component={Start} />
           <Route path="/catalog" exact component={Catalog} />  
-          <Route path="/newarticles" exact component={NewArticles} />          
+          <Route path="/newarticles" exact component={NewArticles} /> 
+          <Route path="/toparticles" exact component={TopArticles} />          
           <Route path="/Article/:pk" exact component={Article} />
           <Route path="/CreateArticle" exact component={CreateArticle} />
           <Route path="/admin" exact component={Admin} />
