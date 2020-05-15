@@ -2,6 +2,10 @@ import  React, { Component }  from 'react';
 import  editPNG from "./img/edit.png";
 import  trashPNG from "./img/trash.png";
 
+import  Service  from  './Service';
+
+
+const  service  =  new  Service();
 
 
 class CreateArticle extends Component{
@@ -31,22 +35,11 @@ class CreateArticle extends Component{
     };
   }
   componentDidMount(){
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    fetch('http://127.0.0.1:8000/allcatalog', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          catalog: result,
-          loading: false
+    var  self  =  this;
+    service.getCatalog().then(function (result) {
+      self.setState({ catalog: result, loading: false })
+    })
 
-        })
-      })
   }
   
   first_change (event) {
@@ -200,32 +193,18 @@ class CreateArticle extends Component{
       alert("Статья должна начинаться с Заголовока")
     } else{
       this.setState({loading: true})
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      var  self  =  this;
 
-      var raw = JSON.stringify({
+      var raw = {
         "type": this.state.first_value,
         "under_type": this.state.second_value.toString(),
         "article": this.state.new_article
+      }
+      service.createArticle(raw).then(function (result) {
+        self.setState({loading:false})
+        alert("Статья добавлена, и на ходится на модерации,спасибо, удачного дня!)")
+        window.location.reload();
       });
-      console.log(raw)
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
-
-      fetch("http://127.0.0.1:8000/createarticle", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            this.setState({loading:false})
-            alert("Статья добавлена, и на ходится на модерации,спасибо, удачного дня!)")
-            window.location.reload();
-          })
-        .catch(error => console.log('error', error));
-
     }
   }
 

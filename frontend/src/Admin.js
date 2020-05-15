@@ -68,48 +68,26 @@ class Admin extends Component{
 
   goodStateUpdate(){
     if(this.state.newArticles){
+      
       this.setState({loading: true})
-
-      var myHeaders = new Headers();
-      var raw = JSON.stringify({"id": this.state.newArticles[this.state.selectedArticle]});
-      myHeaders.append("Content-Type", "application/json");
-      var requestOptions = {
-        method: 'POST',
-        body: raw,
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-      fetch('http://127.0.0.1:8000/goodArticleUpdate', requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          if(result.toString() === "finded") window.location.reload();
-          this.setState({loading: false})
-
-        })
-
-        .catch((err) => { console.log(err, "err")})
-    }  
+      var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
+      var  self  =  this;
+      service.goodArticleUpdate(raw).then(function (result) {
+        if(result.toString() === "finded") window.location.reload();
+        self.setState({loading: false})
+      })
+    }
   }
   badStateUpdate(){
     if(this.state.newArticles){
+      
       this.setState({loading: true})
-      var myHeaders = new Headers();
-      var raw = JSON.stringify({"id": this.state.newArticles[this.state.selectedArticle]});
-      myHeaders.append("Content-Type", "application/json");
-      var requestOptions = {
-        method: 'POST',
-        body: raw,
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-      fetch('http://127.0.0.1:8000/badArticleUpdate', requestOptions)
-        .then(response => response.json())
-        .then(result_article => {
-          if(result_article.toString() === "finded") window.location.reload();
-          this.setState({loading: false})
-
-
-        })
+      var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
+      var  self  =  this;
+      service.badArticleUpdate(raw).then(function (result) {
+        if(result.toString() === "finded") window.location.reload();
+        self.setState({loading: false})
+      })
     }
   }
 
