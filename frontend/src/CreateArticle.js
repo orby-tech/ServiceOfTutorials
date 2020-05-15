@@ -1,18 +1,8 @@
-import  React, { Component, useState }  from 'react';
-import  { Route } from 'react-router-dom';
-
-import  { Link } from 'react-router-dom';
+import  React, { Component }  from 'react';
 import  editPNG from "./img/edit.png";
 import  trashPNG from "./img/trash.png";
 
-const hash = arr => {
-    let result = 0;
-    let string = arr.toString()
-    for (let i = 0; i < string.length; i++) {
-        result += string.charCodeAt(i);
-    }
-    return result % 5;
-};
+
 
 class CreateArticle extends Component{
 
@@ -206,7 +196,7 @@ class CreateArticle extends Component{
   }
   publicateArticle(){
 
-    if (this.state.new_article[0][1] != "header") {
+    if (this.state.new_article[0][1] !== "header") {
       alert("Статья должна начинаться с Заголовока")
     } else{
       this.setState({loading: true})

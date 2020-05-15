@@ -1,7 +1,6 @@
-import  React, { Component, useState }  from 'react';
-import  { Route } from 'react-router-dom';
+import  React, { Component }  from 'react';
 
-import  { Link } from 'react-router-dom';
+
 import  deletePNG from "./img/delete.png";
 import  upgradePNG from "./img/upgrade.png";
 import  Service  from  './Service';

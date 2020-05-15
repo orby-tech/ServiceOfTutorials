@@ -9,10 +9,10 @@ const  service  =  new  Service();
 
 function sortfunction(a, b){
   //Тут можно сказать, что сравнивается a и b, и возвращается -1, 0 или 1.
-  return (a[0][3] - b[0][3])
+  return (a[0][5] - b[0][5])
   }
 
-class NewArticles extends Component{
+class TopArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
@@ -41,7 +41,6 @@ class NewArticles extends Component{
             )
         )
         arr.sort(sortfunction)
-        arr.reverse()
         console.log(arr)
         self.setState({NewArticles: arr})
     });
@@ -114,4 +113,4 @@ class NewArticles extends Component{
   }
 }
 
-export default NewArticles;
+export default TopArticles;
