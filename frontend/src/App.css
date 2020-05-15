@@ -185,6 +185,24 @@
     -moz-animation: cssload-spin 690ms infinite linear;
 }
 
+.newArticlesList__article{
+  width: 500px;
+  height: 70px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.newArticlesList__link{
+  margin-top: 10px;
+  font-size: 140%;
+}
+.newArticlesList__context {
+  text-align: right;
+  opacity: 0.5;
+}
+
 
 
 @keyframes cssload-spin {
