@@ -1,9 +1,11 @@
 import React, { Component }  from 'react';
 
 import { Link } from 'react-router-dom';
+import  Service  from  './Service';
 
 
 
+const  service  =  new  Service();
 
 
 class Catalog extends Component{
@@ -12,53 +14,59 @@ class Catalog extends Component{
     this.findClick = this.findClick.bind(this)
     this.state = {
       catalog: [],
-      find: null
+      find: null,
+      loading: true
     }
   }
   componentDidMount(){
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    fetch('http://127.0.0.1:8000/allcatalog', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result)
-        this.setState({
-          catalog: result
-        })
-      })
+    var  self  =  this;
+    service.getCatalog().then(function (result) {
+      self.setState({ catalog: result, loading: false })
+    });
   }
+
+
   catalog_finded(temp) {
     temp= temp.toLowerCase()
-    let str = this.state.find
-      ? this.state.find.toLowerCase()
-      : null
-    return temp.indexOf(str) !== -1
-      ? "catalog__finded-style"
-      : ""
+    let str = this.state.find ? this.state.find.toLowerCase() : null
+    return temp.indexOf(str) !== -1 ? "catalog__finded-style" : ""
   }
+
+
   findClick(){
     this.setState({find: document.getElementById("catalog__input-find-group").value})
   }
+
+
   modStyle(second) {
-    if(second[2] && second[2] === "unmod"){
+    if (second[2] && second[2] === "unmod") {
       return "catalog__second-level-unmod"
+    } else if (second[2] && second[2] === "noDisplay") {
+      return "catalog__second-level-delete"
     } else {
       return "catalog_second-level"
     }
   }
+
+
   modInfo(second) {
     if(second[2] && second[2] === "unmod"){
       return " (На проверке)"
-    }
+    } else if(second[2] && second[2] === "noDisplay"){}
   }  
-  render() {
 
-    return(   
+  
+  render() {
+    if (this.state.loading) {
+      return (
+        <>
+        <div className="cssload-container">
+            <div className="cssload-zenith"></div>
+        </div>
+        </>
+      )
+    
+    } else return(   
       <div className="catalog">
 
         <h1> Каталог </h1>

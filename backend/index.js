@@ -115,6 +115,74 @@ function build (opts) {
           })
       }
     })
+
+    fastify.route({
+      method: 'POST',
+      url: '/goodArticleUpdate',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            for (let i=0; i<result[0].catalog.length; i++){
+              if(result[0].catalog[i][0] === req.body.id[1]){
+                for (let j=1; j<result[0].catalog[i].length; j++){   
+                  if(result[0].catalog[i][j][0] === req.body.id[2]){
+                    for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
+                      if(result[0].catalog[i][j][1][k][1] && result[0].catalog[i][j][1][k][1].toString() === req.body.id[0][1].toString()){
+                        result[0].catalog[i][j][1][k][2] = "mod" 
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            MongoClient.connect(urldb)
+              .then((db) => db.db("tutorialsdb"))
+              .then((dbo) => {
+                dbo.collection("allcatalog").deleteOne({})
+                dbo.collection("allcatalog").insertOne(result[0])
+                })
+              .catch((err) => { console.log(err, "err")})
+              .then((result_last) => reply.send(JSON.stringify("finded")))
+
+          })
+      }
+    })
+    fastify.route({
+      method: 'POST',
+      url: '/badArticleUpdate',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            for (let i=0; i<result[0].catalog.length; i++){
+              if(result[0].catalog[i][0] === req.body.id[1]){
+                for (let j=1; j<result[0].catalog[i].length; j++){   
+                  if(result[0].catalog[i][j][0] === req.body.id[2]){
+                    for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
+                      if(result[0].catalog[i][j][1][k][1] && result[0].catalog[i][j][1][k][1].toString() === req.body.id[0][1].toString()){
+                        result[0].catalog[i][j][1][k][2] = "noDisplay" 
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            MongoClient.connect(urldb)
+              .then((db) => db.db("tutorialsdb"))
+              .then((dbo) => {
+                dbo.collection("allcatalog").deleteOne({})
+                dbo.collection("allcatalog").insertOne(result[0])
+                })
+              .catch((err) => { console.log(err, "err")})
+              .then((result_last) => reply.send(JSON.stringify("finded")))
+          })
+      }
+    })
     fastify.route({
       method: 'POST',
       url: '/article',
@@ -124,7 +192,6 @@ function build (opts) {
           .then((dbo) => dbo.collection("tutorials").find({id: req.body.id}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            console.log(result)
             reply.send(result)
           })
       }
@@ -133,7 +200,7 @@ function build (opts) {
       method: 'POST',
       url: '/createarticle',
       handler: (req, reply) => {
-        let id = getRandomInt(111111111111111111)
+        let id = Date.now()
         let tutorial = {
           id: id.toString(),
           article: req.body.article
@@ -144,24 +211,23 @@ function build (opts) {
           .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
+            console.log(req.body)
             let indexes = []
             for (let i=0; i<result[0].catalog.length; i++){
               if(result[0].catalog[i][0] === req.body.type){
                 for (let j=1; j<result[0].catalog[i].length; j++){   
                   if(result[0].catalog[i][j][0] === req.body.under_type){
-                    result[0].catalog[i][j][1].push(["new state", id, "unmod"])
+                    console.log(tutorial.article[0][0])
+                    result[0].catalog[i][j][1].push([tutorial.article[0][0], id, "unmod"])
                     MongoClient.connect(urldb)
                       .then((db) => db.db("tutorialsdb"))
                       .then((dbo) => {
-                        dbo.collection("tutorials").insertOne(tutorial)
-                        dbo.collection("allcatalog").deleteOne({})
-                        dbo.collection("allcatalog").insertOne(result[0])
+                        dbo.collection("tutorials").insertOne(tutorial);
+                        dbo.collection("allcatalog").updateOne({name:"name"}, { $set:{catalog: result[0].catalog}})
 
                         })
                       .catch((err) => { console.log(err, "err")})
-                      .then((result_last) => {
-                        reply.send("finded")
-                      })
+                      .then((result_last) => reply.send(JSON.stringify("finded")))
                   }
                 }
               }

@@ -3,7 +3,11 @@ import { Route } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 
+import  Service  from  './Service';
 
+
+
+const  service  =  new  Service();
 
 class Article extends Component{
 
@@ -14,27 +18,15 @@ class Article extends Component{
       article:  []
     };
   }
+
+
   componentDidMount(){
     const { match: { params } } = this.props;
+    var  self  =  this;
 
-    var myHeaders = new Headers();
-    var raw = JSON.stringify({"id": params.pk});
-    console.log(params.pk)
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-      method: 'POST',
-      body: raw,
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    fetch('http://127.0.0.1:8000/article', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result[0].article)
-        this.setState({    
-              article: result[0].article
-            })
-      })
+    service.getArticle({id: params.pk}).then(function (result) {
+      self.setState({ article: result })
+    });
   }
 
   styleOfArticle(key) {

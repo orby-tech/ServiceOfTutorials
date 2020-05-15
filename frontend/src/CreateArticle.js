@@ -36,7 +36,8 @@ class CreateArticle extends Component{
       constructor: false,
       new_article: [],
       redaction: -1,
-      no_link: "create-article__type-new-block-no-link form-control create-article__input"
+      no_link: "create-article__type-new-block-no-link form-control create-article__input",
+      loading: true
     };
   }
   componentDidMount(){
@@ -51,7 +52,9 @@ class CreateArticle extends Component{
       .then(response => response.json())
       .then(result => {
         this.setState({
-          catalog: result
+          catalog: result,
+          loading: false
+
         })
       })
   }
@@ -206,6 +209,7 @@ class CreateArticle extends Component{
     if (this.state.new_article[0][1] != "header") {
       alert("Статья должна начинаться с Заголовока")
     } else{
+      this.setState({loading: true})
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -225,8 +229,13 @@ class CreateArticle extends Component{
 
       fetch("http://127.0.0.1:8000/createarticle", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+            this.setState({loading:false})
+            alert("Статья добавлена, и на ходится на модерации,спасибо, удачного дня!)")
+            window.location.reload();
+          })
         .catch(error => console.log('error', error));
+
     }
   }
 
@@ -246,7 +255,16 @@ class CreateArticle extends Component{
 
 
 
-    return(
+    if (this.state.loading) {
+      return (
+        <>
+        <div className="cssload-container">
+            <div className="cssload-zenith"></div>
+        </div>
+        </>
+      )
+    
+    } else return(
       <div className="create-article__container">
 
 
