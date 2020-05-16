@@ -1,165 +1,44 @@
 import  React, { Component }  from 'react';
 
-
-import  deletePNG from "./img/delete.png";
-import  upgradePNG from "./img/upgrade.png";
-import  Service  from  './Service';
-
-
-
-const  service  =  new  Service();
+import  AdminNewArticles  from './AdminNewArticles'
+import  AdminStructure  from './AdminStructure'
 
 
 class Admin extends Component{
 
   constructor(props) {
     super(props);
-    this.goodStateUpdate = this.goodStateUpdate.bind(this)
-    this.badStateUpdate = this.badStateUpdate.bind(this)
+    this.selector = this.selector.bind(this)
     this.state = {
-      catalog: [],
-      type: "newArticles",
-      newArticles: [],
-      selectedArticle: 0,
-      article: [],
-      reload: false,
-      loading: true
+      select: "newState"
     };
   }
-  componentDidMount(){
-    var  self  =  this;
-    service.getCatalog().then(function (result) {
-      let arr = []
-      for (let i=0; i<result.length; i++){
-        for (let j=1; j<result[i].length; j++){  
-          for (let z=1; z<result[i][j].length; z++){
-            for (let k=1; k<result[i][j][z].length; k++){
-              if (result[i][j][z][k][2] && result[i][j][z][k][2] === "unmod"){
-                arr.push([result[i][j][z][k], result[i][0], result[i][j][0]])
-                console.log(result[i][j][z][k], result[i][0], result[i][j][0])
-              }
-            }
-          }
-        }
-      }
-     if (arr.length!==0) {
-        service.getArticle({id: arr[0][0][1].toString()}).then(function (result_article) {
-          self.setState({    
-            article: result_article,
-            catalog: result,
-            newArticles: arr,
-            selectedArticle: arr.length > 0 ? 0 : -1,
-            loading:false
-          })
-        });
-        
-        } else {
-          self.setState({loading:false})
-        }   
-    });
-  }
-
-
-
-  type_change(event) {
-    this.setState({type: event.target.value})
-  }
-  
-
-  goodStateUpdate(){
-    if(this.state.newArticles){
-      
-      this.setState({loading: true})
-      var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
-      var  self  =  this;
-      service.goodArticleUpdate(raw).then(function (result) {
-        if(result.toString() === "finded") window.location.reload();
-        self.setState({loading: false})
-      })
-    }
-  }
-  badStateUpdate(){
-    if(this.state.newArticles){
-      
-      this.setState({loading: true})
-      var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
-      var  self  =  this;
-      service.badArticleUpdate(raw).then(function (result) {
-        if(result.toString() === "finded") window.location.reload();
-        self.setState({loading: false})
-      })
-    }
+  selector(event){
+    this.setState({select: event.target.value})
   }
 
 
   render() {
-    let newArticlesState = this.state.type === "newArticles"
-    ? ""
-    : "admin__nonDisplay"
-    if (this.state.loading) {
-      return (
-        <>
-        <div className="cssload-container">
-            <div className="cssload-zenith"></div>
-        </div>
-        </>
-      )
-    
-    } else if(this.state.newArticles.length===0){
-      return("Нет новых статей")
+    let adminElement
+    if(this.state.select === "newState"){
+      adminElement = <AdminNewArticles />
+    } else if(this.state.select === "structure"){
+      adminElement = <AdminStructure />
+    }
 
-    } else return(
+    return(
+      
       <div className="admin__container">
-
-        <select  className="custom-select mr-sm-2" 
-                 id = "inlineFormCustomSelect" 
-                 onChange={this.type_change}>
-          <option value="newArticles"> Новые статьи </option>
+        <select  className="custom-select leader__selectPersone" onChange={this.selector}>
+          <option value="newState"> Новые статьи </option>
+          <option value="structure"> Редактировать структуру </option>
+          <option value="redactions"> Предложенные редакции </option>
         </select>
-
-
-
-
-        <div className={newArticlesState}>
-          <div className="admin__newArticlesSelectorBlock">      
-            <img 
-              className="admin__selector"     
-              alt="delete"
-
-              onClick={this.badStateUpdate}
-              src={deletePNG}/>            
-            <img 
-              className="admin__selector"     
-              alt="upgrade"
-              onClick={this.goodStateUpdate}
-              src={upgradePNG}/>
-          </div>
-
-          <div className="admin__grade"> </div>
-
-          <div className="admin__selectedArticle">
-            <table>
-                      { 
-                        this.state.article.map( second  =>
-                          <tr> 
-                            <td> {second[0]} </td>
-                            <td> {second[1]} </td>
-                          </tr>
-                          
-                        )
-                      }
-            </table>
-          </div>
-
-        </div>
-
-
-
-
-
-
+        <br/>
+        {adminElement}
       </div>
-    );
+    )
+
   }
 }
 

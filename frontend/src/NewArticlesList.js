@@ -8,7 +8,6 @@ const  service  =  new  Service();
 
 
 function sortfunction(a, b){
-  //Тут можно сказать, что сравнивается a и b, и возвращается -1, 0 или 1.
   return (a[0][3] - b[0][3])
   }
 
