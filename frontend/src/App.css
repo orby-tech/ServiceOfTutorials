@@ -205,6 +205,35 @@
   opacity: 0.5;
 }
 
+.structure__container{
+  display: grid;
+
+  grid-template-columns: 100px auto;
+  grid-gap: 1vw;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+.structure__type {
+  width: 300px;
+  display: inline-block;
+}
+.structure__typeButton{
+  width: 100px;
+  height: 100%;
+  float: left;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+.structure__underType {
+  display: block;
+}
+.structure__block {
+  margin-top: 20px;
+}
+
+
+
+
 
 
 @keyframes cssload-spin {

@@ -15,25 +15,22 @@ class AdminStructure extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      catalog: [],
-      type: "newArticles",
-      newArticles: [],
-      selectedArticle: 0,
-      article: [],
-      reload: false,
-      loading: true
+      catalogStructure: []
     };
   }
   componentDidMount(){
     var  self  =  this;
+    let temp_arr = []
+    let arr = []
     service.getCatalog().then(function (result) {
       let arr = []
-      for (let i=0; i<result.length; i++){
-        for (let j=1; j<result[i].length; j++){  
-          console.log()
-        }
-      }
+      result.map(global => {
+        temp_arr = []
+        global.splice(1).map ( first => temp_arr.push(first[0]) )
+        arr.push([global[0], temp_arr])
+      })
 
+      self.setState({catalogStructure: arr})
     });
   }
 
@@ -41,8 +38,32 @@ class AdminStructure extends Component{
 
   render() {
     return(
-      <div className="admin__container">
-
+      <div className="structure__block">
+        <button className="btn btn-success"> 
+          Добавить тему
+        </button>	
+        <br />
+        {
+          this.state.catalogStructure.map(global =>
+            <div className="structure__type">
+              <h3> {global[0]}</h3>
+              <div className="structure__container">
+                <div className="structure__typeButton">
+                  <button className="btn btn-success"> 
+                    Добавить 
+                  </button>	                
+                </div>
+                <div className="structure__underType">
+                  {
+                    global[1].map( first =>
+                        <p>{first}</p>
+                      )
+                  }
+                </div>
+              </div>
+            </div>            
+            )
+        }
       </div>
     );
   }
