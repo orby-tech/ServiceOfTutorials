@@ -1,6 +1,7 @@
-import React, { Component }  from 'react';
+import  React, { Component }  from 'react';
 
 import  Service  from  './Service';
+import  Comments from './Comments';
 
 
 
@@ -11,17 +12,18 @@ class Article extends Component{
   constructor(props) {
     super(props);
 
+    const { match: { params } } = this.props;
     this.state = {
-      article:  []
+      article:  [],
+      id: params.pk
     };
   }
 
 
   componentDidMount(){
-    const { match: { params } } = this.props;
     var  self  =  this;
 
-    service.getArticle({id: params.pk}).then(function (result) {
+    service.getArticle({id: this.state.id}).then(function (result) {
       self.setState({ article: result })
     });
   }
@@ -45,6 +47,7 @@ class Article extends Component{
               </div>)
     }
   }
+  
 
 
   componentDidUpdate(prevProps) {
@@ -63,6 +66,7 @@ class Article extends Component{
             this.styleOfArticle(moment)
           )
         }
+        <Comments id={this.state.id} />
       </div>
     );
   }
