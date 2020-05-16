@@ -11,6 +11,10 @@ export default class Service{
 		const url = `${API_URL}/article`;
 		return axios.post(url, raw).then(response => response.data[0].article);
 	}	
+	getComments(raw) {
+		const url = `${API_URL}/comments`;
+		return axios.post(url, raw).then(response => response.data[0].comments);
+	}		
 	createArticle(raw) {
 		const url = `${API_URL}/createarticle`;
 		return axios.post(url, raw).then(response => response.data[0].article);

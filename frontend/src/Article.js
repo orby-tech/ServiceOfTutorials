@@ -1,5 +1,6 @@
-import  React, { Component }  from 'react';
+import React, { Component }  from 'react';
 
+import { Route } from 'react-router-dom';
 import  Service  from  './Service';
 import  Comments from './Comments';
 
@@ -47,7 +48,6 @@ class Article extends Component{
               </div>)
     }
   }
-  
 
 
   componentDidUpdate(prevProps) {
@@ -66,7 +66,7 @@ class Article extends Component{
             this.styleOfArticle(moment)
           )
         }
-        <Comments id={this.state.id} />
+        <Comments id={this.state.id}/>
       </div>
     );
   }
