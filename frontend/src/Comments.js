@@ -13,6 +13,7 @@ class Comments extends Component{
   constructor(props) {
     super(props);
     this.handleShow = this.handleShow.bind(this)
+    this.closeModal = this.closeModal.bind(this)
     this.state = {
       id: this.props.id,
       comments: [],
@@ -29,6 +30,19 @@ class Comments extends Component{
   }
   handleShow(){
     this.setState({showNewComment: true})
+  }
+  closeModal(){
+    this.setState({showNewComment: false})
+  }
+  newCommentUppend(){
+    if(document.getElementById("newCommentHeader") &&
+      document.getElementById("newCommentText") &&
+      document.getElementById("newCommentName")){
+
+        alert("SDF")
+    } else {
+      alert("Все поля должны быть заполнены")
+    }
   }
 
 
@@ -51,8 +65,24 @@ class Comments extends Component{
           Написать комментарий
         </div>
 
-        <Modal show={this.state.showNewComment}>
+
+
+        <Modal show={this.state.showNewComment} onHide={this.closeModal}>
+          <div className="newComment__container">
+            <h3>Комментарий</h3>
+
+            <form>
+              <input className="form-control" id="newCommentName" placeholder="Как вас звать?)"/>
+              <input className="newComment__header form-control" id="newCommentHeader" placeholder="Заголовок"/>
+              <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder="Комментарий"/>
+              <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentUppend()}> Добавить </button>	 
+            </form>
+
+          </div>
+
         </Modal>
+
+        
       </div>
     );
   }

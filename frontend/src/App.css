@@ -277,7 +277,21 @@
   width: 100%;
   border-radius: 10px;
 }
-
+.newComment__container {
+  padding: 30px;
+}
+.newComment__text{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+.newComment__header {
+  margin-top: 4px;
+}
+.newComment__uppend {
+  float: right;
+  width: 200px;
+}
 
 
 @keyframes cssload-spin {
