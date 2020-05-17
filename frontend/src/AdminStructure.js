@@ -15,7 +15,9 @@ class AdminStructure extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      catalogStructure: []
+      catalogStructure: [],
+      showNewType: false,
+      uppend: null
     };
   }
   componentDidMount(){
@@ -33,13 +35,24 @@ class AdminStructure extends Component{
       self.setState({catalogStructure: arr})
     });
   }
-
+  typeUppend(){
+    this.setState({
+      showNewType: true,
+      uppend: "type"
+    })
+  }
+  underTypeUppend(){
+    this.setState({
+      showNewType: true,
+      uppend: "undertype"
+    })
+  }
 
 
   render() {
     return(
       <div className="structure__block">
-        <button className="btn btn-success"> 
+        <button className="btn btn-success" onClick={() => this.typeUppend}> 
           Добавить тему
         </button>	
         <br />
@@ -49,7 +62,7 @@ class AdminStructure extends Component{
               <h3> {global[0]}</h3>
               <div className="structure__container">
                 <div className="structure__typeButton">
-                  <button className="btn btn-success"> 
+                  <button className="btn btn-success" onClick={() => this.underTypeUppend(global[0])}> 
                     Добавить 
                   </button>	                
                 </div>
@@ -64,6 +77,19 @@ class AdminStructure extends Component{
             </div>            
             )
         }
+
+        <Modal show={this.state.showNewType} onHide={this.closeModal}>
+          <div className="newComment__container">
+            <h3>Комментарий</h3>
+
+            <form>
+              <input className="form-control" id="newCommentName" placeholder="Новый раздел"/>
+              <button className="newComment__uppend btn btn-success" onClick={() => this.newTypeUppend()}> Добавить </button>	 
+            </form>
+
+          </div>
+
+        </Modal>
       </div>
     );
   }
