@@ -31,4 +31,8 @@ export default class Service{
 		const url = `${API_URL}/newType`;
 		return axios.post(url, raw).then(response => response);
 	}	
+	deleteComment(raw){
+		const url = `${API_URL}/deletecomment`;
+		return axios.post(url, raw).then(response => response);
+	}
 }

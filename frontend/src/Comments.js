@@ -34,6 +34,10 @@ class Comments extends Component{
   closeModal(){
     this.setState({showNewComment: false})
   }
+  delelteComment(comment){
+    service.deleteComment({ comment: comment, article: this.state.id }).then(function (result) {
+    });
+  }
   newCommentUppend(){
     if(document.getElementById("newCommentHeader") &&
       document.getElementById("newCommentText") &&
@@ -47,6 +51,7 @@ class Comments extends Component{
 
 
   render() {
+    let status = localStorage.getItem('status') === "god" ? "" : "create-article__non-display" 
     return(
       <div className="comments__container">
         <h2 className="comments__title">  Комментарии: </h2>
@@ -58,6 +63,7 @@ class Comments extends Component{
               <br/>
               <div className="comments__text"> {comment.text} </div>
               <div className="comments__author"> автор: {comment.author} </div>
+              <button className={status} onClick={() => this.delelteComment(comment)}></button>
             </div>
             )
         }
