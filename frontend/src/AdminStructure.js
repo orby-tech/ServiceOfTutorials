@@ -1,8 +1,7 @@
 import  React, { Component }  from 'react';
 
 
-import  deletePNG from "./img/delete.png";
-import  upgradePNG from "./img/upgrade.png";
+import Modal from 'react-bootstrap/Modal';
 import  Service  from  './Service';
 
 
@@ -14,10 +13,16 @@ class AdminStructure extends Component{
 
   constructor(props) {
     super(props);
+
+    this.closeModal = this.closeModal.bind(this)
+    this.typeUppend = this.typeUppend.bind(this)
+    this.underTypeUppend = this.underTypeUppend.bind(this)
+
     this.state = {
       catalogStructure: [],
       showNewType: false,
-      uppend: null
+      type: null,
+      loading: false
     };
   }
   componentDidMount(){
@@ -37,22 +42,35 @@ class AdminStructure extends Component{
   }
   typeUppend(){
     this.setState({
-      showNewType: true,
-      uppend: "type"
+      showNewType: true
     })
   }
-  underTypeUppend(){
+  underTypeUppend(type){
     this.setState({
       showNewType: true,
-      uppend: "undertype"
+      type: type
     })
   }
+  newTypeUppend(){
+    this.setState({loading:true})
+    var  self  =  this;
+    let raw = {
+      type:this.state.type,
+      newValue: document.getElementById("newTypeName").value
 
+    }
+    service.newType(raw).then(function (result) {
+      self.setState({loading: false})
+    });
+  }
 
+  closeModal(){
+    this.setState({showNewType: false})
+  }
   render() {
     return(
       <div className="structure__block">
-        <button className="btn btn-success" onClick={() => this.typeUppend}> 
+        <button className="btn btn-success" onClick={() => this.typeUppend()}> 
           Добавить тему
         </button>	
         <br />
@@ -80,10 +98,10 @@ class AdminStructure extends Component{
 
         <Modal show={this.state.showNewType} onHide={this.closeModal}>
           <div className="newComment__container">
-            <h3>Комментарий</h3>
+            <h3>Добавить раздел</h3>
 
             <form>
-              <input className="form-control" id="newCommentName" placeholder="Новый раздел"/>
+              <input className="form-control" id="newTypeName" placeholder="Новый раздел"/>
               <button className="newComment__uppend btn btn-success" onClick={() => this.newTypeUppend()}> Добавить </button>	 
             </form>
 

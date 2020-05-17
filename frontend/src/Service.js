@@ -27,4 +27,8 @@ export default class Service{
 		const url = `${API_URL}/badArticleUpdate`;
 		return axios.post(url, raw).then(response => response);
 	}
+	newType (raw) {
+		const url = `${API_URL}/newType`;
+		return axios.post(url, raw).then(response => response);
+	}	
 }
