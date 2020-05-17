@@ -67,6 +67,8 @@ class Comments extends Component{
             </div>
             )
         }
+
+
         <div className="comments__uppend" onClick={this.handleShow}>
           Написать комментарий
         </div>

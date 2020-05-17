@@ -74,7 +74,26 @@
   margin-right: auto;
   max-width: 600px;
 }
+.article__readact {
+  float: right;
+  margin-top: 20px;
+}
+.article__appendButton {
+  width: 30px;
+  margin-top: 40px;
+}
+.article__delButton {
+  width: 20px;
+  float: right;
+  margin-top: -25px;
 
+}
+.article__editButton {
+  width: 20px;
+  margin-top: -25px;
+  float: right;
+  margin-right: 20px;
+}
 
 .create-article__container {
   margin-left: auto;

@@ -3,16 +3,18 @@ import React, { Component }  from 'react';
 import { Route } from 'react-router-dom';
 import  Service  from  './Service';
 import  Comments from './Comments';
-import { Link } from 'react-router-dom';
 
-
+import  editPNG from "./img/edit.png";
+import  trashPNG from "./img/trash.png";
+import  append from "./img/plus.png"
 
 const  service  =  new  Service();
 
-class Article extends Component{
+class ArticleRedactor extends Component{
 
   constructor(props) {
     super(props);
+    this.deleteElement = this.deleteElement.bind(this)
 
     const { match: { params } } = this.props;
     this.state = {
@@ -49,7 +51,32 @@ class Article extends Component{
               </div>)
     }
   }
+  deleteElement(id) {
+    this.setState(({ article }) => {
 
+      const newArray = [
+        ...article.slice(0, id),
+        ...article.slice(id + 1)
+      ];
+
+      return {
+        article: newArray
+      };
+    });
+  };
+  editElement(id) {
+    if (this.state.redaction !== id){
+      this.setState({
+        redaction: id,
+        temp_type: this.state.article[id][1]
+      })
+    } else {
+      this.setState({
+        redaction: -1,
+        temp_type: "selected"
+      })
+    }
+  }
 
   componentDidUpdate(prevProps) {
     const { match: { params } } = this.props;
@@ -64,17 +91,29 @@ class Article extends Component{
       <div className="article__container">
         { 
           this.state.article.map( moment  =>
-            this.styleOfArticle(moment)
+            <div>
+              <img 
+                className="article__appendButton"	      		
+                onClick={() => this.handleAppend(moment)}
+                alt="plus"
+                src={append}/>
+              {this.styleOfArticle(moment)}
+              <img 
+                className="article__delButton"     
+                alt="delete"
+                onClick={() => this.deleteElement(this.state.article.indexOf(moment))}
+                src={trashPNG}/>
+              <img 
+                className="article__editButton"   
+                alt="edit"
+                onClick={() => this.editElement(this.state.article.indexOf(moment))}
+                src={editPNG}/>   
+            </div>
           )
         }
-
-        <Link className="article__readact btn btn-success" to={"/ArticleRedactor/"+this.state.opend}>
-          Предложить исправление
-        </Link>
-        <Comments id={this.state.id}/>
       </div>
     );
   }
 }
 
-export default Article;
+export default ArticleRedactor;
