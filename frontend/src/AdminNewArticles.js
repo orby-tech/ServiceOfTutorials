@@ -85,7 +85,7 @@ class AdminNewArticles extends Component{
       var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
       var  self  =  this;
       service.badArticleUpdate(raw).then(function (result) {
-        if(result.toString() === "finded") window.location.reload();
+        window.location.reload()
         self.setState({loading: false})
       })
     }
@@ -110,12 +110,6 @@ class AdminNewArticles extends Component{
 
     } else return(
       <div className="admin__container">
-
-        <select  className="custom-select mr-sm-2" 
-                 id = "inlineFormCustomSelect" 
-                 onChange={this.type_change}>
-          <option value="newArticles"> Новые статьи </option>
-        </select>
 
 
 

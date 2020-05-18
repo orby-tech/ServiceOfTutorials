@@ -39,6 +39,7 @@ class Catalog extends Component{
 
 
   modStyle(second) {
+    console.log(second)
     if (second[2] && second[2] === "unmod") {
       return "catalog__second-level-unmod"
     } else if (second[2] && second[2] === "noDisplay") {

@@ -301,7 +301,7 @@ function build (opts) {
       handler: (req, reply) => {
         MongoClient.connect(urldb)
           .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("comments").find({}, {projection:{_id:0}}).toArray())
+          .then((dbo) => dbo.collection("comments").find({id: req.body.id}, {projection:{_id:0}}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
             reply.send(result)
