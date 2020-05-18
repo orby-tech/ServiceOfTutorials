@@ -12,7 +12,14 @@ export default class Service{
 		return axios.post(url, raw).then(response => response.data[0].article);
 	}	
 	
-
+	getRedactions() {
+		const url = `${API_URL}/redactions`;
+		return axios.get(url).then(response => response.data);
+	}
+	RedactionAppdate(raw) {
+		const url = `${API_URL}/redactionAppdate`;
+		return axios.post(url, raw).then(response => response.data);
+	}	
 
 	createArticle(raw) {
 		const url = `${API_URL}/createarticle`;
@@ -27,7 +34,7 @@ export default class Service{
 		return axios.post(url, raw).then(response => response);
 	}
 	redactorArticle (raw) {
-		const url = `${API_URL}/redactorArticle`;
+		const url = `${API_URL}/redactorArticleAppend`;
 		return axios.post(url, raw).then(response => response);
 	}
 

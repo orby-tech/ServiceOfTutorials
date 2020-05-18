@@ -2,6 +2,7 @@ import  React, { Component }  from 'react';
 
 import  AdminNewArticles  from './AdminNewArticles'
 import  AdminStructure  from './AdminStructure'
+import  AdminRedactions  from './AdminRedactions'
 
 
 class Admin extends Component{
@@ -24,10 +25,13 @@ class Admin extends Component{
       adminElement = <AdminNewArticles />
     } else if(this.state.select === "structure"){
       adminElement = <AdminStructure />
+    } else if(this.state.select === "redactions"){
+      adminElement = <AdminRedactions />
     }
 
     return(
       
+      <>
       <div className="admin__container">
         <select  className="custom-select leader__selectPersone" onChange={this.selector}>
           <option value="newState"> Новые статьи </option>
@@ -35,8 +39,10 @@ class Admin extends Component{
           <option value="redactions"> Предложенные редакции </option>
         </select>
         <br/>
-        {adminElement}
       </div>
+        
+        {adminElement}
+      </>
     )
 
   }

@@ -115,7 +115,30 @@ function build (opts) {
           })
       }
     })
-
+    fastify.route({
+      method: 'GET',
+      url: '/redactions',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("redactions").find({}, {projection:{_id:0}}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            console.log(result[0])
+            MongoClient.connect(urldb)
+            .then((db) => db.db("tutorialsdb"))
+            .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
+            .catch((err) => { console.log(err, "err")})
+            .then((result_article) => {
+              reply.send({
+                id: result[0].id,
+                article: result_article[0].article,
+                newArticle: result[0].article
+              })
+            })
+          })
+      }
+    })
     fastify.route({
       method: 'POST',
       url: '/goodArticleUpdate',
@@ -198,9 +221,8 @@ function build (opts) {
     })
     fastify.route({
       method: 'POST',
-      url: '/redactorArticle',
+      url: '/redactorArticleAppend',
       handler: (req, reply) => {
-        console.log(req.body)
         let arr = ({
           id: req.body.id,
           article: req.body.article
@@ -223,7 +245,6 @@ function build (opts) {
           .then((dbo) => dbo.collection("comments").find({}, {projection:{_id:0}}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            console.log(result)
             reply.send(result)
           })
       }
@@ -237,7 +258,6 @@ function build (opts) {
           .then((dbo) => dbo.collection("comments").deleteOne({id:req.body.comment.id, date: req.body.comment.date}))
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            console.log(req.body.comment.date)
             reply.send(result)
           })
       }

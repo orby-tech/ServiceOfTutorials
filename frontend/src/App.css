@@ -179,7 +179,13 @@
   height: 10px;
 }
 
+.adminRedactions__selectedArticle {
+  display: grid;
 
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1vw;
+  min-width: 800px;
+}
 
 
 
