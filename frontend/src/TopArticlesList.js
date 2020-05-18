@@ -34,7 +34,7 @@ class TopArticles extends Component{
             global.splice(1).map( first => 
                 first[1].map( second  => {
                   console.log(second)
-                    if(second[1] && second[2] !== "noDisplay"){
+                    if(second[1] && second[2] !== "noDisplay" && second[3] >= 0){
                             arr.push([[global[0], first[0]].concat(second)])
                     }
                 })   

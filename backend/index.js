@@ -365,7 +365,7 @@ function build (opts) {
                 for (let j=1; j<result[0].catalog[i].length; j++){   
                   if(result[0].catalog[i][j][0] === req.body.under_type){
                     console.log(tutorial.article[0][0])
-                    result[0].catalog[i][j][1].push([tutorial.article[0][0], id, "unmod", 0])
+                    result[0].catalog[i][j][1].push([tutorial.article[0][0], id, "unmod", 1])
                     MongoClient.connect(urldb)
                       .then((db) => db.db("tutorialsdb"))
                       .then((dbo) => {
