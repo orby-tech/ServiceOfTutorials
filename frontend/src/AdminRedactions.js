@@ -27,13 +27,19 @@ class adminRedactions extends Component{
   componentDidMount(){
     var  self  =  this;
     service.getRedactions().then(function (result) {
-      console.log(result)
-      self.setState({
-        article: result.article,
-        newArticle: result.newArticle,
-        id: result.id,
-        loading:false
-      })
+      if(result !== "no"){
+        self.setState({
+          article: result.article,
+          newArticle: result.newArticle,
+          id: result.id,
+          loading:false
+        })
+      } else {
+        self.setState({
+          loading: false
+        })
+      }
+
       })
      
   }

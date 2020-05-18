@@ -124,18 +124,42 @@ function build (opts) {
           .then((dbo) => dbo.collection("redactions").find({}, {projection:{_id:0}}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            console.log(result[0])
-            MongoClient.connect(urldb)
-            .then((db) => db.db("tutorialsdb"))
-            .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
-            .catch((err) => { console.log(err, "err")})
-            .then((result_article) => {
-              reply.send({
-                id: result[0].id,
-                article: result_article[0].article,
-                newArticle: result[0].article
+            if(result[0]){
+              MongoClient.connect(urldb)
+              .then((db) => db.db("tutorialsdb"))
+              .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
+              .catch((err) => { console.log(err, "err")})
+              .then((result_article) => {
+                
+                  reply.send({
+                    id: result[0].id,
+                    article: result_article[0].article,
+                    newArticle: result[0].article
+                  })
+                
+
               })
-            })
+            } else (
+              reply.send("no")
+            )
+          })
+      }
+    })
+
+    fastify.route({
+      method: 'POST',
+      url: '/redactionAppdate',
+      handler: (req, reply) => {
+        console.log(req.body)
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => {
+            dbo.collection("tutorials").updateOne({id: req.body.id}, { $set:{article: req.body.article}});
+            dbo.collection("redactions").deleteOne({id: req.body.id});
+          })
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            reply.send()
           })
       }
     })
