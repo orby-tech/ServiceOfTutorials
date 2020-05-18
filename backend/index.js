@@ -198,6 +198,24 @@ function build (opts) {
     })
     fastify.route({
       method: 'POST',
+      url: '/redactorArticle',
+      handler: (req, reply) => {
+        console.log(req.body)
+        let arr = ({
+          id: req.body.id,
+          article: req.body.article
+        })
+        MongoClient.connect(urldb)
+        .then((db) => db.db("tutorialsdb"))
+        .then((dbo) => dbo.collection("redactions").insertOne(arr))
+        .catch((err) => { console.log(err, "err")})
+        .then((result) => {
+          reply.send()
+        })
+      }
+    })
+    fastify.route({
+      method: 'POST',
       url: '/comments',
       handler: (req, reply) => {
         MongoClient.connect(urldb)
