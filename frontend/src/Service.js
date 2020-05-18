@@ -31,7 +31,7 @@ export default class Service{
 
 	getComments(raw) {
 		const url = `${API_URL}/comments`;
-		return axios.post(url, raw).then(response => response.data[0].comments);
+		return axios.post(url, raw).then(response => response.data);
 	}	
 	appendComment(raw){
 		const url = `${API_URL}/appendcomment`;

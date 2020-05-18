@@ -202,10 +202,10 @@ function build (opts) {
       handler: (req, reply) => {
         MongoClient.connect(urldb)
           .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("comments").find({id: req.body.id}).toArray())
+          .then((dbo) => dbo.collection("comments").find({}, {projection:{_id:0}}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            console.log(req.body)
+            console.log(result)
             reply.send(result)
           })
       }
@@ -214,14 +214,21 @@ function build (opts) {
       method: 'POST',
       url: '/appendcomment',
       handler: (req, reply) => {
-        MongoClient.connect(urldb)
-          .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("comments").find({id: req.body.articleId}).toArray())
-          .catch((err) => { console.log(err, "err")})
-          .then((result) => {
-            console.log("hello", result)
-            reply.send(result)
-          })
+
+            let arr = ({
+              id: req.body.articleId,
+              header: req.body.header,
+              text: req.body.text,
+              author: req.body.name,
+              date: Date.now()
+            })
+            MongoClient.connect(urldb)
+            .then((db) => db.db("tutorialsdb"))
+            .then((dbo) => dbo.collection("comments").insertOne(arr))
+            .catch((err) => { console.log(err, "err")})
+            .then((result) => {
+              reply.send()
+            })
       }
     }) 
 

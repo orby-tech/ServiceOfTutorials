@@ -50,6 +50,7 @@ class Comments extends Component{
         articleId: this.state.id
       }).then(function (result) {
         alert("Спасибо за комментаий!)")
+        window.location.reload()
       });
 
     } else {
