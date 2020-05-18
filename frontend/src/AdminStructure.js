@@ -42,7 +42,8 @@ class AdminStructure extends Component{
   }
   typeUppend(){
     this.setState({
-      showNewType: true
+      showNewType: true,
+      type: -1
     })
   }
   underTypeUppend(type){
@@ -59,8 +60,12 @@ class AdminStructure extends Component{
       newValue: document.getElementById("newTypeName").value
 
     }
+    console.log(raw)
     service.newType(raw).then(function (result) {
-      self.setState({loading: false})
+      self.setState({
+        loading: false,
+        type: null
+      })
     });
   }
 
@@ -100,10 +105,9 @@ class AdminStructure extends Component{
           <div className="newComment__container">
             <h3>Добавить раздел</h3>
 
-            <form>
               <input className="form-control" id="newTypeName" placeholder="Новый раздел"/>
               <button className="newComment__uppend btn btn-success" onClick={() => this.newTypeUppend()}> Добавить </button>	 
-            </form>
+
 
           </div>
 

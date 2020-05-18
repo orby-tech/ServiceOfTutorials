@@ -165,6 +165,41 @@ function build (opts) {
     })
     fastify.route({
       method: 'POST',
+      url: '/newType',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            let arr = result[0].catalog
+            if(req.body.type === -1){
+              arr.push([req.body.newValue])
+              
+            } else  {
+              for ( let i = 0; i<arr.length; i++ ){
+                if ( arr[i][0] === req.body.type ){
+                  arr[i].push([req.body.newValue, []])
+                  break;
+                }
+              }
+            }
+
+            MongoClient.connect(urldb)
+              .then((db) => db.db("tutorialsdb"))
+              .then((dbo) => {
+                dbo.collection("allcatalog").updateOne({name: "name"}, { $set:{catalog: arr}});
+              })
+              .catch((err) => { console.log(err, "err")})
+              .then((result) => {
+                reply.send()
+              })
+          })
+
+      }
+    })
+    fastify.route({
+      method: 'POST',
       url: '/goodArticleUpdate',
       handler: (req, reply) => {
         MongoClient.connect(urldb)
