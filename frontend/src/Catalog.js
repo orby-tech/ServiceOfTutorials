@@ -68,6 +68,7 @@ class Catalog extends Component{
       )
     
     } else return(   
+      <>
       <div className="catalog">
 
         <h1> Каталог </h1>
@@ -104,7 +105,10 @@ class Catalog extends Component{
             )
           }
 
+        
       </div>
+      <div className="alt__footer"></div>
+      </>
     );
   }
 }
