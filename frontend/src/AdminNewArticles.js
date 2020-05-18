@@ -73,7 +73,7 @@ class AdminNewArticles extends Component{
       var raw = {"id": this.state.newArticles[this.state.selectedArticle]};
       var  self  =  this;
       service.goodArticleUpdate(raw).then(function (result) {
-        if(result.toString() === "finded") window.location.reload();
+        window.location.reload();
         self.setState({loading: false})
       })
     }

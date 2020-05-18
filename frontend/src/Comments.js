@@ -41,6 +41,21 @@ class Comments extends Component{
       window.location.reload()
     });
   }
+  dateNow(time){
+    let now = Date.now()
+    let days = (now - time)/1000/3600//24
+    if (days <= 1){
+      return "Сегодня"
+    } else if(days <= 3){
+      return "Не позже трех дней"
+    } else if(days <= 7){
+      return "В течении недели"
+    } else if(days <= 30){
+      return "В течении месяца"
+    } else {
+      return "Давно"
+    }
+  }
   newCommentAppend(){
     if(document.getElementById("newCommentHeader").value &&
       document.getElementById("newCommentText").value &&
@@ -71,7 +86,7 @@ class Comments extends Component{
           this.state.comments.map(comment =>
             <div className="comments__block">
               <h2 className="comments__header">{comment.header} </h2>
-              <p className="comments__date">{comment.date}</p>
+              <p className="comments__date">{this.dateNow(comment.date)}</p>
               <br/>
               <div className="comments__text"> {comment.text} </div>
               <div className="comments__author"> автор: {comment.author} </div>

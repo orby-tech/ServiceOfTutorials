@@ -273,8 +273,37 @@ function build (opts) {
           .then((db) => db.db("tutorialsdb"))
           .then((dbo) => dbo.collection("tutorials").find({id: req.body.id}).toArray())
           .catch((err) => { console.log(err, "err")})
-          .then((result) => {
-            reply.send(result)
+          .then((result_article) => {
+
+            MongoClient.connect(urldb)
+            .then((db) => db.db("tutorialsdb"))
+            .then((dbo) => dbo.collection("allcatalog").find({}, {projection:{_id:0}} ).toArray())
+            .catch((err) => { console.log(err, "err")})
+            .then((result) => {
+              let arr = result[0].catalog
+              for (let i=0; i<result[0].catalog.length; i++){              
+                for (let j=1; j<result[0].catalog[i].length; j++){                     
+                  for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
+                    console.log(result[0].catalog[i][j][1][k][1])
+                    if(result[0].catalog[i][j][1][k][1] === req.body.id){
+                      arr[i][j][1][k][3]++
+                      console.log(arr[i][j][1][k][3])
+                    }
+                  }                  
+                }            
+              }
+              MongoClient.connect(urldb)
+              .then((db) => db.db("tutorialsdb"))
+              .then((dbo) => {
+                dbo.collection("allcatalog").updateOne(
+                  {name: "name"}, { $set:{catalog: arr}});
+                })
+              .catch((err) => { console.log(err, "err")})
+              .then((result) => {
+                reply.send(result_article)
+              })
+  
+            })
           })
       }
     })
@@ -348,8 +377,9 @@ function build (opts) {
       url: '/createarticle',
       handler: (req, reply) => {
         let id = Date.now()
+        id = id.toString()
         let tutorial = {
-          id: id.toString(),
+          id: id,
           article: req.body.article
         }        
         console.log(tutorial)
