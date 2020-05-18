@@ -212,6 +212,21 @@ function build (opts) {
     })    
     fastify.route({
       method: 'POST',
+      url: '/appendcomment',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("comments").find({id: req.body.articleId}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            console.log("hello", result)
+            reply.send(result)
+          })
+      }
+    }) 
+
+    fastify.route({
+      method: 'POST',
       url: '/createarticle',
       handler: (req, reply) => {
         let id = Date.now()

@@ -39,18 +39,18 @@ class Comments extends Component{
     });
   }
   newCommentAppend(){
-    if(document.getElementById("newCommentHeader") &&
-      document.getElementById("newCommentText") &&
-      document.getElementById("newCommentName")){
-        raw = {
-          header: document.getElementById("newCommentHeader"),
-          text: document.getElementById("newCommentText"),
-          name: document.getElementById("newCommentName"),
-          articleId: this.state.id
-        }
-        service.appendComment(raw).then(function (result) {
-          window.location.reload();
-        });
+    if(document.getElementById("newCommentHeader").value &&
+      document.getElementById("newCommentText").value &&
+      document.getElementById("newCommentName").value){
+
+      service.appendComment({
+        header: document.getElementById("newCommentHeader").value,
+        text: document.getElementById("newCommentText").value,
+        name: document.getElementById("newCommentName").value,
+        articleId: this.state.id
+      }).then(function (result) {
+        alert("Спасибо за комментаий!)")
+      });
 
     } else {
       alert("Все поля должны быть заполнены")
@@ -81,22 +81,14 @@ class Comments extends Component{
           Написать комментарий
         </div>
 
+        <div className="newComment__container">
+          <h3>Комментарий</h3>
+            <input className="form-control" id="newCommentName" placeholder="Как вас звать?)"/>
+            <input className="newComment__header form-control" id="newCommentHeader" placeholder="Заголовок"/>
+            <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder="Комментарий"/>
+            <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentAppend()}> Добавить </button>	 
+        </div>
 
-
-        <Modal show={this.state.showNewComment} onHide={this.closeModal}>
-          <div className="newComment__container">
-            <h3>Комментарий</h3>
-
-            <form>
-              <input className="form-control" id="newCommentName" placeholder="Как вас звать?)"/>
-              <input className="newComment__header form-control" id="newCommentHeader" placeholder="Заголовок"/>
-              <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder="Комментарий"/>
-              <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentAppend()}> Добавить </button>	 
-            </form>
-
-          </div>
-
-        </Modal>
 
         
       </div>

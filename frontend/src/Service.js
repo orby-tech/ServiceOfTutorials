@@ -35,6 +35,7 @@ export default class Service{
 	}	
 	appendComment(raw){
 		const url = `${API_URL}/appendcomment`;
+		console.log("hello")
 		return axios.post(url, raw).then(response => response);
 	}
 	deleteComment(raw){
