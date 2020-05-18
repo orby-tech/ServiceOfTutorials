@@ -37,7 +37,7 @@ function App() {
 
 
           <Route exact component={Footer}/>
-
+          <div className="alt__footer"></div>
         </BrowserRouter>
     </div>
   );

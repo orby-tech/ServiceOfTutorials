@@ -18,8 +18,10 @@
 }
 
 .catalog_global-level {
-  display: inline-block;
-  margin: 20px;  
+  display: block;
+  margin: 20px; 
+  width: auto;
+  float: left;
 }
 
 .catalog_first-level{
@@ -311,7 +313,6 @@
   float: right;
   width: 200px;
 }
-
 
 @keyframes cssload-spin {
   100%{ transform: rotate(360deg); transform: rotate(360deg); }
