@@ -12,6 +12,8 @@ export default class Service{
 		return axios.post(url, raw).then(response => response.data[0].article);
 	}	
 	
+
+
 	createArticle(raw) {
 		const url = `${API_URL}/createarticle`;
 		return axios.post(url, raw).then(response => response.data[0].article);
@@ -24,10 +26,18 @@ export default class Service{
 		const url = `${API_URL}/badArticleUpdate`;
 		return axios.post(url, raw).then(response => response);
 	}
+	redactorArticle (raw) {
+		const url = `${API_URL}/redactorArticle`;
+		return axios.post(url, raw).then(response => response);
+	}
+
+
 	newType (raw) {
 		const url = `${API_URL}/newType`;
 		return axios.post(url, raw).then(response => response);
 	}	
+
+
 
 	getComments(raw) {
 		const url = `${API_URL}/comments`;

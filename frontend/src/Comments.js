@@ -36,6 +36,9 @@ class Comments extends Component{
   }
   delelteComment(comment){
     service.deleteComment({ comment: comment, article: this.state.id }).then(function (result) {
+
+      alert("Комментарий удален")
+      window.location.reload()
     });
   }
   newCommentAppend(){
@@ -77,10 +80,6 @@ class Comments extends Component{
             )
         }
 
-
-        <div className="comments__uppend" onClick={this.handleShow}>
-          Написать комментарий
-        </div>
 
         <div className="newComment__container">
           <h3>Комментарий</h3>

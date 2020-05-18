@@ -17,6 +17,7 @@ class ArticleRedactor extends Component{
     this.deleteElement = this.deleteElement.bind(this)
     this.appendElement = this.appendElement.bind(this)
     this.temp_type_change = this.temp_type_change.bind(this)
+    this.publicateArticle = this.publicateArticle.bind(this)
     const { match: { params } } = this.props;
     this.state = {
       article:  [],
@@ -170,6 +171,28 @@ class ArticleRedactor extends Component{
   temp_type_change(event) {
     this.setState({ temp_type: event.target.value })
   }
+
+
+  publicateArticle(){
+
+    if (this.state.article[0][1] !== "header") {
+      alert("Статья должна начинаться с Заголовока")
+    } else{
+      this.setState({loading: true})
+      var  self  =  this;
+
+      var raw = {
+        "id": this.state.id,
+        "article": this.state.article
+      }
+      service.redactorArticle(raw).then(function (result) {
+        self.setState({loading:false})
+        alert("Статья отредактирована, и на ходится на модерации, спасибо, удачного дня!)")
+        window.location.reload();
+      });
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { match: { params } } = this.props;
     if (params.pk !== this.state.opend) {
@@ -257,6 +280,10 @@ class ArticleRedactor extends Component{
                 onClick={() => this.appendElement(-2)}
                 alt="plus"
                 src={append}/>
+          <div  className="create-article__uppend-button"
+                onClick={this.publicateArticle}> 
+            Опубликовать статью 
+          </div>
       </div>
     );
   }

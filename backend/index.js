@@ -212,6 +212,20 @@ function build (opts) {
     })    
     fastify.route({
       method: 'POST',
+      url: '/deletecomment',
+      handler: (req, reply) => {
+        MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("comments").deleteOne({id:req.body.comment.id, date: req.body.comment.date}))
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => {
+            console.log(req.body.comment.date)
+            reply.send(result)
+          })
+      }
+    })    
+    fastify.route({
+      method: 'POST',
       url: '/appendcomment',
       handler: (req, reply) => {
 
