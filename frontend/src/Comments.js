@@ -38,12 +38,20 @@ class Comments extends Component{
     service.deleteComment({ comment: comment, article: this.state.id }).then(function (result) {
     });
   }
-  newCommentUppend(){
+  newCommentAppend(){
     if(document.getElementById("newCommentHeader") &&
       document.getElementById("newCommentText") &&
       document.getElementById("newCommentName")){
+        raw = {
+          header: document.getElementById("newCommentHeader"),
+          text: document.getElementById("newCommentText"),
+          name: document.getElementById("newCommentName"),
+          articleId: this.state.id
+        }
+        service.appendComment(raw).then(function (result) {
+          window.location.reload();
+        });
 
-        alert("SDF")
     } else {
       alert("Все поля должны быть заполнены")
     }
@@ -83,7 +91,7 @@ class Comments extends Component{
               <input className="form-control" id="newCommentName" placeholder="Как вас звать?)"/>
               <input className="newComment__header form-control" id="newCommentHeader" placeholder="Заголовок"/>
               <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder="Комментарий"/>
-              <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentUppend()}> Добавить </button>	 
+              <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentAppend()}> Добавить </button>	 
             </form>
 
           </div>
