@@ -32,13 +32,14 @@ class AdminNewArticles extends Component{
       let arr = []
       for (let i=0; i<result.length; i++){
         for (let j=1; j<result[i].length; j++){  
-          for (let z=1; z<result[i][j].length; z++){
-            for (let k=1; k<result[i][j][z].length; k++){
-              if (result[i][j][z][k][2] && result[i][j][z][k][2] === "unmod"){
-                arr.push([result[i][j][z][k], result[i][0], result[i][j][0]])
-                console.log(result[i][j][z][k], result[i][0], result[i][j][0])
+          for (let z=0; z<result[i][j][1].length; z++){
+
+            console.log(result[i][j][1][z])
+              if (result[i][j][1][z][2] && result[i][j][1][z][2] === "unmod"){
+                arr.push([result[i][j][1][z], result[i][0], result[i][j][0]])
+                console.log(arr)
               }
-            }
+          
           }
         }
       }

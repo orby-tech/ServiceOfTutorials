@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = 'http://api.tutorials.getteam.space';
 const token = {headers: { Authorization: `JWT ${localStorage.getItem('token')}`}};
 
 export default class Service{
