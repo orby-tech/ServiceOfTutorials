@@ -34,6 +34,10 @@
 .catalog__second-level-unmod {
   opacity: .3;
 }
+.catalog__reit{
+  opacity: .3;
+  float: right;
+}
 .catalog__second-level-delete {
   display: none;
 }

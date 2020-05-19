@@ -62,6 +62,7 @@ class AdminStructure extends Component{
     }
     console.log(raw)
     service.newType(raw).then(function (result) {
+      window.location.reload()
       self.setState({
         loading: false,
         type: null

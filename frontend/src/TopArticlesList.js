@@ -16,11 +16,17 @@ class TopArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
+
+
+    let topArticles = []
+    if(localStorage.getItem('topArticles')){
+      topArticles = JSON.parse(localStorage.getItem('topArticles'))
+    }
     this.state = {
       catalog: [],
       find: null,
-      loading: true,
-      NewArticles: [],
+      loading: false,
+      topArticles: topArticles,
     }
   }
 
@@ -28,22 +34,30 @@ class TopArticles extends Component{
   componentDidMount(){
     var  self  =  this;
     service.getCatalog().then(function (result) {
-      self.setState({ catalog: result, loading: false })
-        let arr = []
-        self.state.catalog.map( global=>
-            global.splice(1).map( first => 
-                first[1].map( second  => {
-                  console.log(second)
-                    if(second[1] && second[2] !== "noDisplay" && second[3] >= 0){
-                            arr.push([[global[0], first[0]].concat(second)])
-                    }
-                })   
-            )
-        )
-        arr.sort(sortfunction)
-        arr.reverse()
-        console.log(arr)
-        self.setState({NewArticles: arr})
+      if ( !localStorage.getItem('catalog') 
+        || !localStorage.getItem('topArticles') 
+        || JSON.parse(localStorage.getItem('catalog')) !== result){
+        self.setState({ catalog: result ,loading: true})
+        localStorage.setItem('catalog', JSON.stringify(result))
+          let arr = []
+          self.state.catalog.map( global=>
+              global.splice(1).map( first => 
+                  first[1].map( second  => {
+                    console.log(second)
+                      if(second[1] && second[2] !== "noDisplay" && second[3] >= 0){
+                              arr.push([[global[0], first[0]].concat(second)])
+                      }
+                  })   
+              )
+          )
+          arr.sort(sortfunction)
+          arr.reverse()
+          console.log(arr)
+          self.setState({topArticles: arr, loading:false})
+          localStorage.setItem('topArticles', JSON.stringify(arr))
+        } else {
+          self.setState({topArticles: JSON.parse(localStorage.getItem('topArticles'))})
+        }
     });
   }
 
@@ -101,7 +115,7 @@ class TopArticles extends Component{
           </button>
           <div/>
           { 
-            this.state.NewArticles.map( global  =>
+            this.state.topArticles.map( global  =>
                 <div className="newArticlesList__article" key={global}> 
                     <Link className="newArticlesList__link" to={"/Article/"+global[0][3]}>{global[0][2]}</Link> 
                     <p className="newArticlesList__context">{global[0][1]} ({global[0][0]}) рейтинг:  { global[0][5]}</p>

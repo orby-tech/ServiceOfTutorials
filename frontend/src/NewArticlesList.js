@@ -15,11 +15,17 @@ class NewArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
+
+    
+    let newArticles = []
+    if(localStorage.getItem('newArticles')){
+      newArticles = JSON.parse(localStorage.getItem('newArticles'))
+    }
     this.state = {
       catalog: [],
       find: null,
-      loading: true,
-      NewArticles: [],
+      loading: false,
+      NewArticles: newArticles,
     }
   }
 
@@ -27,7 +33,7 @@ class NewArticles extends Component{
   componentDidMount(){
     var  self  =  this;
     service.getCatalog().then(function (result) {
-      self.setState({ catalog: result, loading: false })
+      self.setState({ catalog: result, loading: true })
         let arr = []
         self.state.catalog.map( global=>
             global.splice(1).map( first => 
@@ -42,7 +48,7 @@ class NewArticles extends Component{
         arr.sort(sortfunction)
         arr.reverse()
         console.log(arr)
-        self.setState({NewArticles: arr})
+        self.setState({NewArticles: arr, loading: false})
     });
   }
 

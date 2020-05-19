@@ -12,16 +12,26 @@ class Catalog extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
+
+
+    let catalog = []
+    if(localStorage.getItem('catalog')){
+      catalog = JSON.parse(localStorage.getItem('catalog'))
+    }
     this.state = {
-      catalog: [],
+      catalog: catalog,
       find: null,
-      loading: true
+      loading: false
     }
   }
   componentDidMount(){
     var  self  =  this;
     service.getCatalog().then(function (result) {
-      self.setState({ catalog: result, loading: false })
+      if(!localStorage.getItem('catalog') || JSON.parse(localStorage.getItem('catalog')) !== result){
+        self.setState({ catalog: result })
+        localStorage.setItem('catalog', JSON.stringify(result))
+      }
+      self.setState({ loading: false })
     });
   }
 
@@ -39,7 +49,6 @@ class Catalog extends Component{
 
 
   modStyle(second) {
-    console.log(second)
     if (second[2] && second[2] === "unmod") {
       return "catalog__second-level-unmod"
     } else if (second[2] && second[2] === "noDisplay") {
@@ -95,6 +104,8 @@ class Catalog extends Component{
                             className={this.catalog_finded(second[0])}
                             to={"/Article/"+second[1]}>{second[0]}</Link>
                             {this.modInfo(second)}
+                            <div className="catalog__reit" >{"("+second[3]+")"}</div>
+                            
                           </div>
                         )
                       }

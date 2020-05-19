@@ -20,8 +20,14 @@ class CreateArticle extends Component{
     this.temp_type_change = this.temp_type_change.bind(this)
     this.publicateArticle = this.publicateArticle.bind(this)
 
+
+
+    let catalog = []
+    if(localStorage.getItem('catalog')){
+      catalog = JSON.parse(localStorage.getItem('catalog'))
+    }
     this.state = {
-      catalog:  [],
+      catalog:  catalog,
       first_value: "",
       second_value: "selected",
       second_steck: [],
