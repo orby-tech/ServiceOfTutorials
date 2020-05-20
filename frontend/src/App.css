@@ -18,11 +18,15 @@
 }
 
 .catalog_global-level {
-  display: block;
   margin: 20px; 
   width: auto;
+  height: auto;
   float: left;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
+  display: inline-grid;
+  padding: 20px;
+  border: 1px solid rgba(205, 133, 63, 0.3);
+  border-radius: 20px;
 }
 
 .catalog_first-level{
