@@ -34,3 +34,29 @@
 	margin-top: 150px;
 	height: 150px;
 }
+@media screen and (max-width: 600px) {
+	.footer {
+		position: fixed;
+		height: 50px;
+		left: -10; bottom: 0;
+		background: #8df59b;
+		color: #fff; 
+		width: 100%; 
+		font-size: 70%;
+
+		float: left;
+	   }
+	.footer__link {
+		display: block;
+		float: right;
+		border: 1px solid rgb(15, 70, 52);
+		border-radius: 6px;
+	}
+	.footer__about {
+		display: block;
+		float: left;
+		margin: -6px;
+		color: rgb(4, 82, 57);
+	}
+
+  }

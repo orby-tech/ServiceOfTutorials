@@ -14,11 +14,7 @@ class Footer extends Component{
     return(   
       <div className="footer">
       <p className="footer__about"> Создал и поддерживает проект:</p>
-      <p className="footer__author"> Бондаренко Тимур </p>
-
-      <a className="footer__link" href="http://www.orby.site/about"> Контакты </a>
-
-      <a className="footer__link" href="http://www.orby.site/about"> Другие проекты </a>
+      <a className="footer__link" href="http://www.orby.site/about">  Бондаренко Тимур </a>
 
       </div>
     );
