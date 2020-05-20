@@ -15,8 +15,13 @@ class Article extends Component{
     super(props);
 
     const { match: { params } } = this.props;
+    let article = []
+    let fref = 'Article'+params.pk
+    if(localStorage.getItem(fref)){
+      article = JSON.parse(localStorage.getItem('catalog'))
+    }
     this.state = {
-      article:  [],
+      article:  article,
       id: params.pk
     };
   }
@@ -24,8 +29,12 @@ class Article extends Component{
 
   componentDidMount(){
     var  self  =  this;
-
+    let fref = 'Article'+this.state.id
     service.getArticle({id: this.state.id}).then(function (result) {
+      if(!localStorage.getItem(fref) || JSON.parse(localStorage.getItem(fref)) !== result){
+        self.setState({ catalog: result })
+        localStorage.setItem(fref, JSON.stringify(result))
+      }
       self.setState({ article: result })
     });
   }
