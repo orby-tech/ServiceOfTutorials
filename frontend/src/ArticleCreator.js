@@ -8,7 +8,7 @@ import  append from "./img/plus.png"
 
 const  service  =  new  Service();
 
-class ArticleRedactor extends Component{
+class ArticleCreator extends Component{
 
   constructor(props) {
     super(props);
@@ -16,10 +16,9 @@ class ArticleRedactor extends Component{
     this.appendElement = this.appendElement.bind(this)
     this.temp_type_change = this.temp_type_change.bind(this)
     this.publicateArticle = this.publicateArticle.bind(this)
-    const { match: { params } } = this.props;
+
     this.state = {
       article:  [],
-      id: params.pk,
       status: null,
       edit: null,
       temp_type: null
@@ -27,13 +26,7 @@ class ArticleRedactor extends Component{
   }
 
 
-  componentDidMount(){
-    var  self  =  this;
-
-    service.getArticle({id: this.state.id}).then(function (result) {
-      self.setState({ article: result })
-    });
-  }
+ 
 
   styleOfArticle(key) {
     if(!key){
@@ -171,6 +164,7 @@ class ArticleRedactor extends Component{
   }
 
 
+
   publicateArticle(){
 
     if (this.state.article[0][1] !== "header") {
@@ -180,23 +174,18 @@ class ArticleRedactor extends Component{
       var  self  =  this;
 
       var raw = {
-        "id": this.state.id,
+        "type": this.props.type,
+        "under_type": this.props.under_type.toString(),
         "article": this.state.article
       }
-      service.redactorArticle(raw).then(function (result) {
+      service.createArticle(raw).then(function (result) {
         self.setState({loading:false})
-        alert("Статья отредактирована, и на ходится на модерации, спасибо, удачного дня!)")
+        alert("Статья добавлена, и на ходится на модерации,спасибо, удачного дня!)")
         window.location.reload();
       });
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { match: { params } } = this.props;
-    if (params.pk !== this.state.opend) {
-      this.setState({opend: params.pk});
-    }
-  }
 
   render() {
     if(this.state.status === "edit"){
@@ -287,4 +276,4 @@ class ArticleRedactor extends Component{
   }
 }
 
-export default ArticleRedactor;
+export default ArticleCreator;
