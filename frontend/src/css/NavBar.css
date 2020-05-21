@@ -5,7 +5,7 @@
   background-size: cover;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 400ms;
+  transition: transform 600ms;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -42,4 +42,13 @@
   font-size: 120%;
   text-align: right;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+.collapse {
+	transition: all 300ms ease-in-out;
+	top: -100vh;
+	z-index: 9;
+
+}
+.collapse.show {
+  top: 0;
 }

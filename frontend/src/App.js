@@ -13,6 +13,7 @@ import  Article  from './Article'
 import  ArticleRedactor  from './ArticleRedactor'
 import  Admin  from './Admin'
 import  CreateArticle  from './CreateArticle'
+import  GlobalFinding  from './GlobalFind'
 
 import  { Route } from 'react-router-dom';
 import  { BrowserRouter } from 'react-router-dom';
@@ -35,6 +36,7 @@ function App() {
           <Route path="/CreateArticle" exact component={CreateArticle} />
           <Route path="/admin" exact component={Admin} />
 
+          <Route path="/globalFind" exact component={GlobalFinding} />
 
           <Route exact component={Footer}/>
           <div className="alt__footer"></div>

@@ -16,7 +16,11 @@
   margin-right: auto;
   width: auto;
 }
+.catalog{
 
+  margin-left: auto;
+  margin-right: auto;
+}
 .catalog_global-level {
   margin: 20px; 
   min-width: 320px;
