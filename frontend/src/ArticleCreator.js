@@ -234,7 +234,7 @@ class ArticleCreator extends Component{
           <input className={this.styleOfRedactionInput(moment)} id="linkInputFromRedaction"/>
           <div  className="create-article__create-button"
                 onClick={() => this.addBlock(this.state.article.indexOf(moment))}> 
-            Изменить заполненный блок
+            Добавить заполненный блок
           </div>                
         </div> 
       )

@@ -70,17 +70,17 @@ class Article extends Component{
   render() {
 
     return(
-      <div className="article__container">
-        { 
-          this.state.article.map( moment  =>
-            this.styleOfArticle(moment)
-          )
-        }
+        <div className="article__container">
+          { 
+            this.state.article.map( moment  =>
+              this.styleOfArticle(moment)
+            )
+          }
 
-        <Link className="article__readact btn btn-success" to={"/ArticleRedactor/"+this.state.opend}>
-          Предложить исправление
-        </Link>
-        <Comments id={this.state.id}/>
+          <Link className="article__readact btn btn-success" to={"/ArticleRedactor/"+this.state.opend}>
+            Предложить исправление
+          </Link>
+          <Comments id={this.state.id}/>
       </div>
     );
   }
