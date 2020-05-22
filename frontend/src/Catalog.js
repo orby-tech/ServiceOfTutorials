@@ -118,6 +118,9 @@ class Catalog extends Component{
 
         
       </div>
+
+      <div className="alt__footer"></div>
+      <div className="alt__footer"></div>
       <div className="alt__footer"></div>
       </>
     );
