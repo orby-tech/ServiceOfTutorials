@@ -1,7 +1,7 @@
 import  React from 'react';
 import  './App.css';
 import  './App.scss';
-import  './css/NavBar.css';
+import  './css/NavBar.scss';
 import  './css/Footer.css';
 
 import  Start  from './Start'
