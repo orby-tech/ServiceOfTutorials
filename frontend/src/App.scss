@@ -27,16 +27,40 @@ body{
 }
 .catalog{
   @extend %centering;
-
+}
+.catalog__container{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .catalog_global-level {
-  margin: 20px; 
-  min-width: 320px;
+  margin-top: 20px; 
+  margin-left: 20px;
+  min-width: 300px;
+  max-width: 380px;
   height: auto;
-  float: left;
-  display: inline-grid;
+  display: inline-grid; 
+
+
   @extend %border__twenty;
 }
+@media screen and (max-width: 800px) {
+  .catalog__container{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+@media screen and (max-width: 400px) {
+  .catalog__container{
+    display: grid; 
+    grid-template-columns: 1fr;
+  }
+  .catalog_global-level{
+    margin-left: 0px;
+  }
+
+}
+
 
 .catalog_first-level{
   display: block;

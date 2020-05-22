@@ -89,6 +89,7 @@ class Catalog extends Component{
             Найти
           </button>
           <div/>
+          <div className="catalog__container">
           { 
             this.state.catalog.map( global  =>
               <div key={global} className="catalog_global-level">
@@ -115,13 +116,10 @@ class Catalog extends Component{
               </div>
             )
           }
+          </div>
 
         
       </div>
-
-      <div className="alt__footer"></div>
-      <div className="alt__footer"></div>
-      <div className="alt__footer"></div>
       </>
     );
   }
