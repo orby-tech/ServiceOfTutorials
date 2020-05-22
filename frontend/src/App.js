@@ -1,21 +1,22 @@
 import  React from 'react';
 import  './App.css';
+import  './App.scss';
 import  './css/NavBar.css';
 import  './css/Footer.css';
 
 import  Start  from './Start'
 import  NavBar  from './NavBar'
-import  Footer  from './Footer'
-import  Catalog  from './Catalog'
+import  Footer   from './Footer'
+import  Catalog    from './Catalog'
 import  NewArticles  from './NewArticlesList'
 import  TopArticles  from './TopArticlesList'
-import  Article  from './Article'
+import  Article       from './Article'
 import  ArticleRedactor  from './ArticleRedactor'
-import  Admin  from './Admin'
+import  Admin          from './Admin'
 import  CreateArticle  from './CreateArticle'
 import  GlobalFinding  from './GlobalFind'
 
-import  { Route } from 'react-router-dom';
+import  { Route }       from 'react-router-dom';
 import  { BrowserRouter } from 'react-router-dom';
 
 
