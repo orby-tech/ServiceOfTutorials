@@ -47,7 +47,16 @@ class Catalog extends Component<{}, ParentState>{
     return temp.indexOf(str) !== -1 ? "catalog__finded-style" : ""
   }
 
-
+  catalogFindGlobal (temp) {
+    if (!this.state.find){
+      return "catalog_global-level"
+    } else if(temp.join(" ").toLowerCase().indexOf(this.state.find.toLowerCase()) !== -1) {
+      return "catalog_global-level"
+    } else {
+      return "admin__nonDisplay"
+    }
+    
+  }
 
 
   modStyle(second) {
@@ -103,7 +112,7 @@ class Catalog extends Component<{}, ParentState>{
           <div className="catalog__container">
           { 
             this.state.catalog.map( global  =>
-              <div key={global} className="catalog_global-level">
+              <div key={global} className={this.catalogFindGlobal(global)}>
                 <h2 className={this.catalog_finded(global[0])}>{global[0]}</h2>
                 { 
                   global.slice(1).map( first  =>
