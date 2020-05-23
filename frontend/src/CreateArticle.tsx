@@ -1,7 +1,7 @@
 import  React, { Component }  from 'react';
 
 import  Service  from  './Service';
-import  ArticleCreator  from  './ArticleCreator';
+import  ArticleCreator  from  './CreateArticlesElements/ArticleCreator';
 import  { FirstSelect } from './CreateArticlesElements/firstSelect.tsx'
 import  { SecondSelect } from './CreateArticlesElements/SecondSelect.tsx'
 const  service  =  new  Service();
@@ -102,7 +102,7 @@ class CreateArticle extends Component<{}, ParentState>{
         <FirstSelect catalog={this.state.catalog} firstChange={this.first_change}/>
 
         <SecondSelect catalog={this.state.second_steck} secondChange={this.second_change}/>  
-        
+
         <ArticleCreator type={this.state.first_value} under_type={this.state.second_value} />
       </div>
     );

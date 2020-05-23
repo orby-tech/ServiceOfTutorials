@@ -1,10 +1,10 @@
 import React, { Component }  from 'react';
 
-import  Service  from  './Service';
+import  Service  from  './../Service';
 
-import  editPNG from "./img/edit.png";
-import  trashPNG from "./img/trash.png";
-import  append from "./img/plus.png"
+import  editPNG from "./../img/edit.png";
+import  trashPNG from "./../img/trash.png";
+import  append from "./../img/plus.png"
 
 const  service  =  new  Service();
 
