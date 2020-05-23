@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 
 interface FindFormProps{
     secondChange(title:string): void;
     catalog: any[]
   }
 export const SecondSelect: React.FC<FindFormProps> = props => {
-    const [find, setFind] = useState<string>('');
     let styleOfSecondChange : string  = props.catalog.length !== 0
                       ? "custom-select mr-sm-2 create-article__input" 
                       : "create-article__non-display"

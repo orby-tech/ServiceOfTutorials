@@ -30,7 +30,7 @@ class Admin extends Component<{}, ParentState> {
 
 
   render() {
-    let adminElement
+    let adminElement : any
     if(this.state.select === "newState"){
       adminElement = <AdminNewArticles />
     } else if(this.state.select === "structure"){

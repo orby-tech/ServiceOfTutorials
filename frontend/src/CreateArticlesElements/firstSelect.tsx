@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 
 interface FindFormProps{
     firstChange(title:string): void;
     catalog: any[]
   }
 export const FirstSelect: React.FC<FindFormProps> = props => {
-    const [find, setFind] = useState<string>('');
 
 
     const first_change = (event: React.ChangeEvent<HTMLSelectElement>) => {

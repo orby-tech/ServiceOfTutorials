@@ -1,6 +1,5 @@
 import axios from 'axios';
 const API_URL = 'http://api.tutorials.getteam.space';
-const token = {headers: { Authorization: `JWT ${localStorage.getItem('token')}`}};
 
 export default class Service{
 	getCatalog() {

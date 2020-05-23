@@ -47,7 +47,7 @@ class CreateArticle extends Component<{}, ParentState>{
   
   first_change  = ( title: string ) =>  {
     let target : any[];
-    this.state.catalog.map( temp =>
+    this.state.catalog.forEach( temp =>
       {if(title === temp[0]) target = temp.slice(1)}
     )
 

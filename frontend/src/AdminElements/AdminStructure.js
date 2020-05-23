@@ -30,7 +30,7 @@ class AdminStructure extends Component{
     let temp_arr = []
     service.getCatalog().then(function (result) {
       let arr = []
-      result.map(global => {
+      result.forEach(global => {
         temp_arr = []
         global.splice(1).map ( first => temp_arr.push(first[0]) )
         arr.push([global[0], temp_arr])

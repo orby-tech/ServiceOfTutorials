@@ -19,7 +19,7 @@ class Catalog extends Component<{}, ParentState>{
     super(props);
 
 
-    let catalog = []
+    let catalog : any [] = []
     if(localStorage.getItem('catalog')){
       catalog = JSON.parse(localStorage.getItem('catalog'))
     }
@@ -43,7 +43,7 @@ class Catalog extends Component<{}, ParentState>{
 
   catalog_finded(temp) {
     temp= temp.toLowerCase()
-    let str = this.state.find ? this.state.find.toLowerCase() : null
+    let str : string = this.state.find ? this.state.find.toLowerCase() : null
     return temp.indexOf(str) !== -1 ? "catalog__finded-style" : ""
   }
 

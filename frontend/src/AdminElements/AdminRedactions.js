@@ -77,9 +77,6 @@ class adminRedactions extends Component{
 
 
   render() {
-    let newArticlesState = this.state.type === "newArticles"
-    ? ""
-    : "admin__nonDisplay"
     if (this.state.loading) {
       return (
         <>

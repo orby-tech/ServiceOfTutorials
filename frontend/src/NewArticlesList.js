@@ -37,8 +37,7 @@ class NewArticles extends Component{
         let arr = []
         self.state.catalog.map( global=>
             global.splice(1).map( first => 
-                first[1].map( second  => {
-                  console.log(second)
+                first[1].forEach( second  => {
                     if(second[1] && second[2] !== "noDisplay"){
                             arr.push([[global[0], first[0]].concat(second)])
                     }
