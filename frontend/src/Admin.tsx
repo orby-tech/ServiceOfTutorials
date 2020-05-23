@@ -1,13 +1,15 @@
 import  React, { Component }  from 'react';
 
-import  AdminNewArticles  from './AdminNewArticles'
-import  AdminStructure  from './AdminStructure'
-import  AdminRedactions  from './AdminRedactions'
+import  AdminNewArticles  from './AdminElements/AdminNewArticles'
+import  AdminStructure  from './AdminElements/AdminStructure'
+import  AdminRedactions  from './AdminElements/AdminRedactions'
 
 
+interface ParentState{
+  select: string;
+}
 
-
-class Admin extends Component{
+class Admin extends Component<{}, ParentState> {
 
   constructor(props) {
      

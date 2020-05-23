@@ -1,9 +1,9 @@
 import  React, { Component }  from 'react';
 
 
-import  deletePNG from "./img/delete.png";
-import  upgradePNG from "./img/upgrade.png";
-import  Service  from  './Service';
+import  deletePNG from "./../img/delete.png";
+import  upgradePNG from "./../img/upgrade.png";
+import  Service  from  './../Service';
 
 
 

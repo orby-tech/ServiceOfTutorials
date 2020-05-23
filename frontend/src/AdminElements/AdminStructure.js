@@ -2,7 +2,7 @@ import  React, { Component }  from 'react';
 
 
 import Modal from 'react-bootstrap/Modal';
-import  Service  from  './Service';
+import  Service  from  './../Service';
 
 
 
