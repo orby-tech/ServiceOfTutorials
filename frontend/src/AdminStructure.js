@@ -28,7 +28,6 @@ class AdminStructure extends Component{
   componentDidMount(){
     var  self  =  this;
     let temp_arr = []
-    let arr = []
     service.getCatalog().then(function (result) {
       let arr = []
       result.map(global => {

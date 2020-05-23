@@ -5,14 +5,22 @@ import  AdminStructure  from './AdminStructure'
 import  AdminRedactions  from './AdminRedactions'
 
 
+
+
 class Admin extends Component{
 
   constructor(props) {
+     
     super(props);
-    this.selector = this.selector.bind(this)
+    let select : string = "newState";
     this.state = {
-      select: "newState"
+      select : select
     };
+
+    this.selector = this.selector.bind(this)
+
+
+  
   }
   selector(event){
     this.setState({select: event.target.value})

@@ -1,7 +1,4 @@
-import  React, { Component, useState }  from 'react';
-
-import { Route } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
+import  React, { Component }  from 'react';
 
 import  Service  from  './Service';
 

@@ -1,14 +1,19 @@
 import React, { Component }  from 'react';
 
 import { Link } from 'react-router-dom';
+
+
 import  Service  from  './Service';
-
-
-
 const  service  =  new  Service();
 
+interface ParentState {
+  find:string;
+  catalog:any[];
+  loading:boolean;
+}
 
-class Catalog extends Component{
+
+class Catalog extends Component<{}, ParentState>{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
@@ -64,6 +69,20 @@ class Catalog extends Component{
       return " (На проверке)"
     } else if(second[2] && second[2] === "noDisplay"){}
   }  
+  displayList(first){
+    return( 
+      first.map( second  =>
+        <div key={second} className={this.modStyle(second)}>
+          <Link
+          className={this.catalog_finded(second[0])}
+          to={"/Article/"+second[1]}>{second[0]}</Link>
+          {this.modInfo(second)}
+          <div className="catalog__reit" >{"("+second[3]+")"}</div>
+          
+        </div>
+      )
+    )
+  }
 
   
   render() {
@@ -82,12 +101,12 @@ class Catalog extends Component{
 
         <h1> Каталог </h1>
           <div className="catalog__header-find-group"> Найти в каталоге:</div>
-          <input className="form-control catalog__input-find-group"
-                  id="catalog__input-find-group"/>
-          <button className="form-control catalog__button-find-group"
-                  onClick={this.findClick}>
-            Найти
-          </button>
+            <input className="form-control catalog__input-find-group"
+                    id="catalog__input-find-group"/>
+            <button className="form-control catalog__button-find-group"
+                    onClick={this.findClick}>
+              Найти
+            </button>
           <div/>
           <div className="catalog__container">
           { 
@@ -98,18 +117,7 @@ class Catalog extends Component{
                   global.slice(1).map( first  =>
                     <div key={first} className="catalog_first-level">
                       <h4 className={this.catalog_finded(first[0])}>{first[0]}</h4>
-                      { 
-                        first[1].map( second  =>
-                          <div key={second} className={this.modStyle(second)}>
-                            <Link
-                            className={this.catalog_finded(second[0])}
-                            to={"/Article/"+second[1]}>{second[0]}</Link>
-                            {this.modInfo(second)}
-                            <div className="catalog__reit" >{"("+second[3]+")"}</div>
-                            
-                          </div>
-                        )
-                      }
+                      {this.displayList(first[1])}
                     </div>
                   )
                 }
