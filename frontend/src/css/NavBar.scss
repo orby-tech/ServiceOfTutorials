@@ -1,5 +1,5 @@
 
-$color-four: rgba(140, 240, 110, 0.3);
+$color-four: rgba(140, 240, 110, 0.6);
 
 
 * {
@@ -14,9 +14,9 @@ $color-four: rgba(140, 240, 110, 0.3);
   padding-top: 70px;
   padding-left: 30px;
   padding-bottom: 30px;
-	display: flex;
+  display: flex;
+  
 	visibility: visible;
-	opacity: 0.95;
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
@@ -38,12 +38,12 @@ $color-four: rgba(140, 240, 110, 0.3);
   height: 60px;
   background-size: cover;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
   transition: transform 600ms;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .nav_row_in .top {
