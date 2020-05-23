@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 import  Service  from  './Service';
+import { FindForm } from './FindCatalog.tsx';
 const  service  =  new  Service();
 
 interface ParentState {
@@ -16,7 +17,6 @@ interface ParentState {
 class Catalog extends Component<{}, ParentState>{
   constructor(props) {
     super(props);
-    this.findClick = this.findClick.bind(this)
 
 
     let catalog = []
@@ -48,9 +48,6 @@ class Catalog extends Component<{}, ParentState>{
   }
 
 
-  findClick(){
-    this.setState({find: document.getElementById("catalog__input-find-group").value})
-  }
 
 
   modStyle(second) {
@@ -83,7 +80,9 @@ class Catalog extends Component<{}, ParentState>{
       )
     )
   }
-
+  FindFormHandler = ( title: string ) => {
+    this.setState({ find: title })
+  }
   
   render() {
     if (this.state.loading) {
@@ -100,14 +99,7 @@ class Catalog extends Component<{}, ParentState>{
       <div className="catalog">
 
         <h1> Каталог </h1>
-          <div className="catalog__header-find-group"> Найти в каталоге:</div>
-            <input className="form-control catalog__input-find-group"
-                    id="catalog__input-find-group"/>
-            <button className="form-control catalog__button-find-group"
-                    onClick={this.findClick}>
-              Найти
-            </button>
-          <div/>
+          <FindForm onAdd={this.FindFormHandler}/>
           <div className="catalog__container">
           { 
             this.state.catalog.map( global  =>
