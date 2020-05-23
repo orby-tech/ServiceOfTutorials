@@ -13,7 +13,7 @@ import  TopArticles  from './TopArticlesList'
 import  Article       from './Article'
 import  ArticleRedactor  from './ArticleRedactor'
 import  Admin          from './Admin.tsx'
-import  CreateArticle  from './CreateArticle'
+import  CreateArticle  from './CreateArticle.tsx'
 import  GlobalFinding  from './GlobalFind'
 
 import  { Route }       from 'react-router-dom';

@@ -188,6 +188,10 @@ class ArticleCreator extends Component{
 
 
   render() {
+    let styleOfCreatorBlock = this.props.under_type !== "selected"
+    ? "article__container"
+    : "create-article__non-display"
+
     if(this.state.status === "edit"){
       let moment = this.state.edit
       return (
@@ -239,7 +243,7 @@ class ArticleCreator extends Component{
         </div> 
       )
     } else  return(
-      <div className="article__container">
+      <div className={styleOfCreatorBlock}>
         { 
           this.state.article.map( moment  =>
             <div>
