@@ -42,9 +42,19 @@ class Catalog extends Component<{}, ParentState>{
 
 
   catalog_finded(temp) {
-    temp= temp.toLowerCase()
-    let str : string = this.state.find ? this.state.find.toLowerCase() : null
-    return temp.indexOf(str) !== -1 ? "catalog__finded-style" : ""
+
+    if (!this.state.find 
+      || temp[0].toLowerCase().indexOf(this.state.find.toLowerCase()) !== -1){
+        if (temp[2] && temp[2] === "unmod") {
+          return "catalog__second-level-unmod"
+        } else if (temp[2] && temp[2] === "noDisplay") {
+          return "catalog__second-level-delete"
+        } else {
+          return "catalog_second-level"
+        }
+    } else {
+      return "admin__nonDisplay"
+    }
   }
 
   catalogFindGlobal (temp) {
@@ -68,16 +78,6 @@ class Catalog extends Component<{}, ParentState>{
     
   }
 
-  modStyle(second) {
-    if (second[2] && second[2] === "unmod") {
-      return "catalog__second-level-unmod"
-    } else if (second[2] && second[2] === "noDisplay") {
-      return "catalog__second-level-delete"
-    } else {
-      return "catalog_second-level"
-    }
-  }
-
 
   modInfo(second) {
     if(second[2] && second[2] === "unmod"){
@@ -87,9 +87,8 @@ class Catalog extends Component<{}, ParentState>{
   displayList(first){
     return( 
       first.map( second  =>
-        <div key={second} className={this.modStyle(second)}>
+        <div key={second} className={this.catalog_finded(second)}>
           <Link
-          className={this.catalog_finded(second[0])}
           to={"/Article/"+second[1]}>{second[0]}</Link>
           {this.modInfo(second)}
           <div className="catalog__reit" >{"("+second[3]+")"}</div>
@@ -122,11 +121,11 @@ class Catalog extends Component<{}, ParentState>{
           { 
             this.state.catalog.map( global  =>
               <div key={global} className={this.catalogFindGlobal(global)}>
-                <h2 className={this.catalog_finded(global[0])}>{global[0]}</h2>
+                <h2 >{global[0]}</h2>
                 { 
                   global.slice(1).map( first  =>
                     <div key={first} className={this.catalogFindFirst(first)}>
-                      <h4 className={this.catalog_finded(first[0])}>{first[0]}</h4>
+                      <h4>{first[0]}</h4>
                       {this.displayList(first[1])}
                     </div>
                   )
