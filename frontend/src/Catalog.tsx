@@ -57,7 +57,16 @@ class Catalog extends Component<{}, ParentState>{
     }
     
   }
-
+  catalogFindFirst (temp) {
+    if (!this.state.find){
+      return "catalog_first-level"
+    } else if(temp.join(" ").toLowerCase().indexOf(this.state.find.toLowerCase()) !== -1) {
+      return "catalog_first-level"
+    } else {
+      return "admin__nonDisplay"
+    }
+    
+  }
 
   modStyle(second) {
     if (second[2] && second[2] === "unmod") {
@@ -116,7 +125,7 @@ class Catalog extends Component<{}, ParentState>{
                 <h2 className={this.catalog_finded(global[0])}>{global[0]}</h2>
                 { 
                   global.slice(1).map( first  =>
-                    <div key={first} className="catalog_first-level">
+                    <div key={first} className={this.catalogFindFirst(first)}>
                       <h4 className={this.catalog_finded(first[0])}>{first[0]}</h4>
                       {this.displayList(first[1])}
                     </div>
