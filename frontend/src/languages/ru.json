@@ -1,0 +1,43 @@
+{
+	"aboutTitle": "Обо мне и этом проекте",
+
+	"aboutProgectTitle": "Этот проект - это сайт-портфолио",
+	"aboutProgectText": "Я здесь тестирую свои идеи и возможности. Он написан на Django-REST и React/Redux.",
+	"aboutProgectButton": "Подробнее",
+
+	"aboutMeTitle": "Обо мне",
+	"aboutMeText_0": "Я люблю работать и создавать.",
+	"aboutMeText_1": "Больше трех лет назад я начал изучать C#, но это не увенчалось успехом.",
+	"aboutMeText_2": "Сейчас я работаю с Python и React/Redux и являюсь преподавателем точных наук вот уже более четырех лет.",
+	"aboutMeButton": "Контакты",
+
+	"aboutMyProgects": "Мои проекты:",
+	"aboutMyTutorialsProgect": "Сайт с материалами для легкого старта в it",
+	"aboutMySocialProgect": "Это проект социальная сеть, для поиска людей по категориям",
+
+
+	"language": "язык",
+	"navBarAbout": "Инфо",
+	"navBarMiniGames": "Мини игры",
+	"navBarUtils": "Приложения",
+	"navBarSunny": "Робот Санни",
+	"navBarTimeShow": "Расписание",
+
+	"navBarCustumers": "Клиненты",
+	"navBarCreateCustumer": "Добавить клиента",
+
+	"navBarTcTacGame": "Крестики нолики",
+	"navBarTakeCrazyBall": "Поймай дикий шарик",
+
+	"navBarCalculator": "Калькулятор",
+
+	"today": "сегодня",
+	"tommorow": "завтра",
+	"Monday": "Понедельник",
+	"Tuesday": "Вторник",
+	"Wednesday": "Среда",
+	"Thursday": "Четвег",
+	"Friday": "Пятница",
+	"Saturday": "Суббота",
+	"Sunday": "Воскресенье"
+}

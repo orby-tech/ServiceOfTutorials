@@ -5,13 +5,20 @@ $color-four: rgba(140, 240, 110, 0.6);
 * {
 	box-sizing: border-box;
 }
-
+.lang_select {
+  width: 60px;
+  position: fixed;
+  right: 20px;
+  top: 60px;
+  z-index: 10000;
+  opacity: 0.6;
+}
 #menu {
   padding-right: 50px;
   background: $color-four;
   width: 300px;
   height: auto;
-  padding-top: 70px;
+  padding-top: 90px;
   padding-left: 30px;
   padding-bottom: 30px;
   display: flex;

@@ -1,0 +1,44 @@
+{
+	"aboutTitle": "About me and this progect",
+
+	"aboutProgectTitle": "It's progect is site-portfolio",
+	"aboutProgectText": "I testing my ideas and fitces in this web-site. It's created with React/Redux and Django-REST.",
+	"aboutProgectButton": "More information",
+
+	"aboutMeTitle": "Me",
+	"aboutMeText_0": "I like work, I can create.",
+	"aboutMeText_1": "More than three years ago, I started learning C#, but it was unsuccessful.",
+	"aboutMeText_2": "Now I work with Python and React",
+	"aboutMeButton": "Contacts",
+
+	"aboutMyProgects": "My progects:",
+	"aboutMyTutorialsProgect": "It's site with tutorials to easy start in IT",
+	"aboutMySocialProgect": "It's progect - social network, for finding peoples, by tags",
+
+
+	"language": "language",
+	"navBarAbout": "About",
+	"navBarMiniGames": "Mini Games",
+	"navBarUtils": "Utils",
+	"navBarSunny": "Sunny Robot",
+	"navBarTimeShow":	"Schedule",
+
+	"navBarCustumers": "CUSTOMERS",
+	"navBarCreateCustumer": "CREATE CUSTOMER",
+
+	"navBarTcTacGame": "Tic Tac Game",
+	"navBarTakeCrazyBall": "Take Crazy Ball",
+
+	"navBarCalculator": "Calculator",
+
+
+	"today": "today",
+	"tommorow": "tommorow",
+	"Monday": "Monday",
+	"Tuesday": "Tuesday",
+	"Wednesday": "Wednesday",
+	"Thursday": "Thursday",
+	"Friday": "Friday",
+	"Saturday": "Saturday",
+	"Sunday": "Sunday"
+}

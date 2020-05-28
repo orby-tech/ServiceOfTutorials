@@ -2,11 +2,16 @@ import React, { Component }  from 'react';
 
 import { Link } from 'react-router-dom';
 
+import {
+  multilanguage,
+  changeLanguage,
+  loadLanguages
+} from "redux-multilanguage";
+
+import  { connect } from 'react-redux'
 
 
-
-
-class NavBar extends Component{
+class PRENavBar extends Component{
 
   constructor(props) {
     super(props);
@@ -16,6 +21,20 @@ class NavBar extends Component{
       collapsed: true
     };
   }
+  loadLanguages() {
+    this.props.dispatch(loadLanguages({
+        languages: {
+          en: require("./languages/en.json"),
+          ru: require("./languages/ru.json")
+        }
+      })
+    );
+  }
+
+  changeLanguage = e => {
+    const languageCode = e.target.value;
+    this.props.dispatch(changeLanguage(languageCode));
+  };
   componentDidMount(){
     const { match: { params } } = this.props;
     this.setState({opend: params.id});
@@ -40,7 +59,7 @@ class NavBar extends Component{
     const classCollapse = this.state.collapsed
                 ? 'collapse navbar-collapse' 
                 : 'collapse navbar-collapse show';
-    
+    const { strings, currentLanguageCode } = this.props;
 
     return(   
           <nav className="navbar navbar-light transparent-nav" id="navBar">
@@ -57,7 +76,15 @@ class NavBar extends Component{
                     className="line bottom"
                     d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272" />
             </svg>
-
+            <div className="lang_select">
+              <select className="custom-select mr-sm-2" 
+                      id="inlineFormCustomSelect" 
+                      value={currentLanguageCode} 
+                      onChange={this.changeLanguage}>
+                <option value="en">en</option>
+                <option value="ru">ru</option>
+              </select>
+            </div>
             <div id="menu" className={classCollapse}>
               <ul id="logo" className="navbar-nav ml-auto">
                 <li className="nav-item" id="navBar">
@@ -89,7 +116,13 @@ class NavBar extends Component{
                         className="nav-link"
                         to="/CreateArticle"> Написать статью
                   </Link>
-                </li>                                    
+                </li>    
+                <li className="nav-item" id="navBar">
+                  <Link onClick={this.toggleNavbar} 
+                        className="nav-link"
+                        to="/downloud"> Скачать мобильную версию
+                  </Link>
+                </li>                                  
               </ul>
             </div>
 
@@ -99,5 +132,11 @@ class NavBar extends Component{
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { 
+    theme: state.theme
+  };
+}
 
+const NavBar = connect(mapStateToProps)(multilanguage(PRENavBar));
 export default NavBar;
