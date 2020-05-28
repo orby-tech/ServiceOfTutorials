@@ -16,12 +16,12 @@
 	"aboutMySocialProgect": "It's progect - social network, for finding peoples, by tags",
 
 
-	"language": "language",
 	"navBarAbout": "About",
-	"navBarMiniGames": "Mini Games",
-	"navBarUtils": "Utils",
-	"navBarSunny": "Sunny Robot",
-	"navBarTimeShow":	"Schedule",
+	"navBarCatalog": "Catalog",
+	"navBarTop": "Popularest articles",
+	"navBarNew": "New Articles",
+	"navBarWrite":	"Write new article",	
+	"navBarDownload":	"Download android version",
 
 	"navBarCustumers": "CUSTOMERS",
 	"navBarCreateCustumer": "CREATE CUSTOMER",

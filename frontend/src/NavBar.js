@@ -90,37 +90,37 @@ class PRENavBar extends Component{
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/"> О проекте
+                        to="/"> {strings["navBarAbout"]}
                   </Link>
                 </li>           
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/catalog"> Каталог мини статетей
+                        to="/catalog"> {strings["navBarCatalog"]}
                   </Link>
                 </li>
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/toparticles"> Лучшие статьи
+                        to="/toparticles"> {strings["navBarTop"]}
                   </Link>
                 </li>   
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/newarticles"> Новые статьи
+                        to="/newarticles"> {strings["navBarNew"]}
                   </Link>
                 </li>                  
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/CreateArticle"> Написать статью
+                        to="/CreateArticle"> {strings["navBarWrite"]}
                   </Link>
                 </li>    
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/downloud"> Скачать мобильную версию
+                        to="/downloud"> {strings["navBarDownload"]}
                   </Link>
                 </li>                                  
               </ul>

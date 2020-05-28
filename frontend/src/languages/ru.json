@@ -16,12 +16,12 @@
 	"aboutMySocialProgect": "Это проект социальная сеть, для поиска людей по категориям",
 
 
-	"language": "язык",
-	"navBarAbout": "Инфо",
-	"navBarMiniGames": "Мини игры",
-	"navBarUtils": "Приложения",
-	"navBarSunny": "Робот Санни",
-	"navBarTimeShow": "Расписание",
+	"navBarAbout": "О проекте",
+	"navBarCatalog": "Каталог",
+	"navBarTop": "Лучшие статьи",
+	"navBarNew": "Новые статьи",
+	"navBarWrite":	"Написать новую статью",	
+	"navBarDownload":	"Скачать мобильную версию",
 
 	"navBarCustumers": "Клиненты",
 	"navBarCreateCustumer": "Добавить клиента",
