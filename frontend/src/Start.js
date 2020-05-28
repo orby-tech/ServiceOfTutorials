@@ -1,67 +1,87 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
+import  { connect } from 'react-redux'
 
-class Start extends Component{
+class PREStart extends Component{
+	state = {language: 'en'}
+
+	changeLanguage = e => {
+		const languageCode = e.target.value;
+		this.props.dispatch(changeLanguage(languageCode));
+	  };
+	  componentDidMount(){
+		this.loadLanguages();
+	  }
+	  loadLanguages() {
+		this.props.dispatch(loadLanguages({
+			languages: {
+			  en: require("./languages/en.json"),
+			  ru: require("./languages/ru.json")
+			}
+		  })
+		);
+	  }
 	render(){
+		const { strings, currentLanguageCode } = this.props;
 		return(
 			<div className="start__global">
-				<h2> О проекте </h2>
+				<h2>{strings["aboutTitle"]}</h2>
 				<p> 
-						Не относитесь к этому ресурсу как к источнику капитальных знаний.
-				
-				<br/>
-						Статьи опубликованные здесь предназначенны исключительно для изи-старта.
-						
+					{strings["about0Text"]}				
+					<br/>
+					{strings["about1Text"]}						
 				</p>
 				<br/>
 				<hr/>
 				<h4> 
-						Вы не станете профессионалом по этим статьям!
+					{strings["about0Header"]}
 				</h4>
 				<p>
-						Но вы сделаете первый шаг, а это уже пол дела. 
+					{strings["about10Text"]}
 				</p>
 				<br/>
 				<hr/>
 				<h4>
-						Этот ресурс - не учебник!
+					{strings["about1Header"]}	
 				</h4>
-				<p>				
-						Безусловно, я стараюсь делать его максимально правильным и подробным.
-				<br/>
-						Но у данного подхода, естественно, есть явные минусы, я в курсе них.
-				<br/>
-				<br/>
-						И хочу, чтобы вы знали их тоже:
-				<br/>
+				<p>	
+					{strings["about12Text"]}			
+					<br/>
+					{strings["about13Text"]}			
+					<br/>
+					<br/>
+					{strings["about2Header"]}			
+					<br/>
 				<br/>
 				<ol className="start__ol">
-					<li> Недостаточность информации </li>
-					<li> Необходимость дополнения </li>
-					<li> Не развернутость</li>
-					<li> Я буду рад дополнению и расширению данной базы </li>
-					<li> Я буду рад узнать об ошибках </li>
+					<li> {strings["about0list"]} </li>
+					<li> {strings["about1list"]} </li>
+					<li> {strings["about2list"]}</li>
+					<li> {strings["about3list"]} </li>
+					<li> {strings["about4list"]} </li>
 				</ol> 
 				</p>
 				<h1>
-						Начни прямо сейчас!
+					{strings["about3Header"]}
 				</h1>
 
         <Link
               className="nav-link"
-              to="/catalog"> Каталог мини статетей
+              to="/catalog"> {strings["about0link"]}
         </Link>				
         <Link
               className="nav-link "
-              to="/toparticles"> Лучшие статьи
+              to="/toparticles"> {strings["about1link"]}
         </Link>
         <Link
               className="nav-link"
-              to="/newarticles"> Новые статьи
+              to="/newarticles"> {strings["about2link"]}
         </Link>
 			</div>
 			)
 	}
 }
+const Start = connect()(multilanguage(PREStart));
 export default Start;

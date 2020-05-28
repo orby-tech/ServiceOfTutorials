@@ -2,12 +2,7 @@ import React, { Component }  from 'react';
 
 import { Link } from 'react-router-dom';
 
-import {
-  multilanguage,
-  changeLanguage,
-  loadLanguages
-} from "redux-multilanguage";
-
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
 import  { connect } from 'react-redux'
 
 
