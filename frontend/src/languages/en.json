@@ -1,19 +1,26 @@
 {
-	"aboutTitle": "About me and this progect",
+	"aboutTitle": "About",
+	"about0Text": "U must haven't opinion that it book with fundamentally knowledges.",
+	"about1Text": "Articles where is knowledges to easy start in IT.",
 
-	"aboutProgectTitle": "It's progect is site-portfolio",
-	"aboutProgectText": "I testing my ideas and fitces in this web-site. It's created with React/Redux and Django-REST.",
-	"aboutProgectButton": "More information",
+	"about0Header": "You will not become a professional on these articles!",
+	"about10Text": "But u can do first step, and open new wey",
+	"about1Header": "It's web-site is not student book!",
+	"about12Text": "Of course, I try do cool and widthly.",
+	"about13Text": "But it's format have a minuses, I know it",
+	
+	"about2Header": "And, I want you to know them too:",
+	"about0list": "Недостаточность информации",
+	"about1list": "Необходимость дополнения",
+	"about2list": "Не развернутость",
+	"about3list": "Я буду рад дополнению и расширению данной базы",
+	"about4list": "Я буду рад узнать об ошибках",
 
-	"aboutMeTitle": "Me",
-	"aboutMeText_0": "I like work, I can create.",
-	"aboutMeText_1": "More than three years ago, I started learning C#, but it was unsuccessful.",
-	"aboutMeText_2": "Now I work with Python and React",
-	"aboutMeButton": "Contacts",
+	"about3Header": "Начни прямо сейчас!",
+	"about0link": "Каталог мини статетей",
+	"about1link": "Лучшие статьи",
+	"about2link": "Новые статьи",
 
-	"aboutMyProgects": "My progects:",
-	"aboutMyTutorialsProgect": "It's site with tutorials to easy start in IT",
-	"aboutMySocialProgect": "It's progect - social network, for finding peoples, by tags",
 
 
 
