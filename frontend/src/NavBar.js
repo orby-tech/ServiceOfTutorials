@@ -64,7 +64,7 @@ class PRENavBar extends Component{
 
     return(   
           <nav className="navbar navbar-light transparent-nav" id="navBar">
-            <h3 className="" id="navBar">Агрегатор информации для старта</h3>
+            <h3 className="" id="navBar">{strings["navBarTitle"]}</h3>
 
             <svg className={pic} viewBox="0 0 100 100" width="80" onClick={this.toggleNavbar}>
               <path
