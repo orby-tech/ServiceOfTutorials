@@ -12,7 +12,7 @@ import  { connect } from 'react-redux'
 
 
 class PRENavBar extends Component{
-
+  state = {language: 'en'}
   constructor(props) {
     super(props);
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -20,6 +20,17 @@ class PRENavBar extends Component{
     this.state = {
       collapsed: true
     };
+  }
+
+
+  changeLanguage = e => {
+    const languageCode = e.target.value;
+    this.props.dispatch(changeLanguage(languageCode));
+  };
+  componentDidMount(){
+    const { match: { params } } = this.props;
+    this.setState({opend: params.id});
+    this.loadLanguages();
   }
   loadLanguages() {
     this.props.dispatch(loadLanguages({
@@ -30,16 +41,6 @@ class PRENavBar extends Component{
       })
     );
   }
-
-  changeLanguage = e => {
-    const languageCode = e.target.value;
-    this.props.dispatch(changeLanguage(languageCode));
-  };
-  componentDidMount(){
-    const { match: { params } } = this.props;
-    this.setState({opend: params.id});
-  }
-
 
   componentDidUpdate(prevProps) {
     const { match: { params } } = this.props;
@@ -134,7 +135,6 @@ class PRENavBar extends Component{
 }
 const mapStateToProps = (state) => {
   return { 
-    theme: state.theme
   };
 }
 
