@@ -116,7 +116,7 @@ class PRENavBar extends Component{
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
-                        to="/downloud"> {strings["navBarDownload"]}
+                        to="/download"> {strings["navBarDownload"]}
                   </Link>
                 </li>                                  
               </ul>
