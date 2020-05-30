@@ -2,7 +2,10 @@ import React, { Component }  from 'react';
 
 import { Link } from 'react-router-dom';
 import  Service  from  './Service';
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
+import  { connect } from 'react-redux'
 
+import { FindForm } from './FindCatalog.tsx';
 
 const  service  =  new  Service();
 
@@ -11,7 +14,7 @@ function sortfunction(a, b){
   return (a[0][3] - b[0][3])
   }
 
-class NewArticles extends Component{
+class PRENewArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
@@ -83,6 +86,8 @@ class NewArticles extends Component{
 
   
   render() {
+    const { strings, currentLanguageCode } = this.props;
+    console.log(currentLanguageCode)
     if (this.state.loading) {
       return (
         <>
@@ -95,14 +100,8 @@ class NewArticles extends Component{
     } else return(   
       <div className="catalog">
 
-        <h1> Новые статьи </h1>
-          <div className="catalog__header-find-group"> Найти в каталоге:</div>
-          <input className="form-control catalog__input-find-group"
-                  id="catalog__input-find-group"/>
-          <button className="form-control catalog__button-find-group"
-                  onClick={this.findClick}>
-            Найти
-          </button>
+        <h1> {strings["newArticles"]} </h1>
+        <FindForm onAdd={this.FindFormHandler} strings={strings["find"]}/>
           <div/>
           { 
             this.state.NewArticles.map( global  =>
@@ -117,5 +116,5 @@ class NewArticles extends Component{
     );
   }
 }
-
+const NewArticles = connect()(multilanguage(PRENewArticles));
 export default NewArticles;
