@@ -54,7 +54,6 @@ class PRETopArticles extends Component{
           )
           arr.sort(sortfunction)
           arr.reverse()
-          console.log(arr)
           self.setState({topArticles: arr, loading:false})
           localStorage.setItem('topArticles', JSON.stringify(arr))
         } else {
@@ -115,7 +114,8 @@ class PRETopArticles extends Component{
             this.state.topArticles.map( global  =>
                 <div className="newArticlesList__article" key={global}> 
                     <Link className="newArticlesList__link" to={"/Article/"+global[0][3]}>{global[0][2]}</Link> 
-                    <p className="newArticlesList__context">{global[0][1]} ({global[0][0]}) рейтинг:  { global[0][5]}</p>
+                    <p className="newArticlesList__context">{global[0][1]} ({global[0][0]})</p>
+                    <p className="newArticlesList__context">рейтинг:  { global[0][5]}</p>
                 </div>
             )
           }
