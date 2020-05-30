@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 import  Service  from  './Service';
 import { FindForm } from './FindCatalog.tsx';
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
+import  { connect } from 'react-redux'
+
 const  service  =  new  Service();
 
 interface ParentState {
@@ -14,7 +17,7 @@ interface ParentState {
 }
 
 
-class Catalog extends Component<{}, ParentState>{
+class PRECatalog extends Component<{}, ParentState>{
   constructor(props) {
     super(props);
 
@@ -102,6 +105,7 @@ class Catalog extends Component<{}, ParentState>{
   }
   
   render() {
+    const { strings, currentLanguageCode } = this.props;
     if (this.state.loading) {
       return (
         <>
@@ -115,8 +119,8 @@ class Catalog extends Component<{}, ParentState>{
       <>
       <div className="catalog">
 
-        <h1> Каталог </h1>
-          <FindForm onAdd={this.FindFormHandler}/>
+        <h1> {strings["catalog"]} </h1>
+          <FindForm onAdd={this.FindFormHandler} strings={strings["find"]}/>
           <div className="catalog__container">
           { 
             this.state.catalog.map( global  =>
@@ -141,5 +145,5 @@ class Catalog extends Component<{}, ParentState>{
     );
   }
 }
-
+const Catalog = connect()(multilanguage(PRECatalog));
 export default Catalog;

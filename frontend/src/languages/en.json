@@ -10,23 +10,21 @@
 	"about13Text": "But it's format have a minuses, I know it",
 	
 	"about2Header": "And, I want you to know them too:",
-	"about0list": "Недостаточность информации",
-	"about1list": "Необходимость дополнения",
-	"about2list": "Не развернутость",
-	"about3list": "Я буду рад дополнению и расширению данной базы",
-	"about4list": "Я буду рад узнать об ошибках",
+	"about0list": "Lack of information",
+	"about1list": "Necessity of addition",
+	"about2list": "Not detailed",
+	"about3list": "I will be glad to complement and expand this database",
+	"about4list": "I will be glad to know about the errors",
 
-	"about3Header": "Начни прямо сейчас!",
-	"about0link": "Каталог мини статетей",
-	"about1link": "Лучшие статьи",
-	"about2link": "Новые статьи",
+	"about3Header": "Start now!",
+	"about0link": "Catalog mini-articles",
+	"about1link": "Popularest articles",
+	"about2link": "New articles",
 
 
 
 
  	"navBarTitle": "combine of start info",
-
-
 
 	"navBarAbout": "About",
 	"navBarCatalog": "Catalog",
@@ -35,22 +33,11 @@
 	"navBarWrite":	"Write new article",	
 	"navBarDownload":	"Download android version",
 
-	"navBarCustumers": "CUSTOMERS",
-	"navBarCreateCustumer": "CREATE CUSTOMER",
+	"catalog": "Catalog",
+	"popular": "Popularest Articles:",
 
-	"navBarTcTacGame": "Tic Tac Game",
-	"navBarTakeCrazyBall": "Take Crazy Ball",
-
-	"navBarCalculator": "Calculator",
+	"find": "Find in catalog:"
 
 
-	"today": "today",
-	"tommorow": "tommorow",
-	"Monday": "Monday",
-	"Tuesday": "Tuesday",
-	"Wednesday": "Wednesday",
-	"Thursday": "Thursday",
-	"Friday": "Friday",
-	"Saturday": "Saturday",
-	"Sunday": "Sunday"
+
 }
