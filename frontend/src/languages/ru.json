@@ -40,5 +40,8 @@
 
 
 	"footerCreate": "Создал и поддерживает проект:",
-	"footerAuthor": "Бондаренко Тимур"
+	"footerAuthor": "Бондаренко Тимур",
+
+
+	"download__android": "Download native APK"
 }
