@@ -2,7 +2,7 @@
 
 const Fastify = require('fastify')
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://localhost:27017/";
+var urldb = "mongodb://185.20.225.204:27017/";
 
 
 
@@ -10,6 +10,40 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+
+
+const noDisplayNewArticle = ( result, id ) => {
+  for (let i=0; i<result[0].catalog.length; i++){
+    if(result[0].catalog[i][0] === req.body.id[1]){
+      for (let j=1; j<result[0].catalog[i].length; j++){   
+        if(result[0].catalog[i][j][0] === req.body.id[2]){
+          for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
+            if(result[0].catalog[i][j][1][k][1] && result[0].catalog[i][j][1][k][1].toString() === req.body.id[0][1].toString()){
+              result[0].catalog[i][j][1][k][2] = "noDisplay" 
+              return result
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+const countPPInAllCatalog = ( result, id ) => {
+  let arr = result[0].catalog
+  for (let i=0; i<result[0].catalog.length; i++){              
+    for (let j=1; j<result[0].catalog[i].length; j++){                     
+      for (let k=0; k<result[0].catalog[i][j][1].length; k++){
+        if(result[0].catalog[i][j][1][k][1] === id){
+          arr[i][j][1][k][3]++
+        }
+      }                  
+    }            
+  }
+  return arr
+}
 
 
 function build (opts) {
@@ -103,7 +137,7 @@ function build (opts) {
 
 
     fastify.route({
-      method: 'GET',
+      method: 'POST',
       url: '/allcatalog',
       handler: (req, reply) => {
         MongoClient.connect(urldb)
@@ -241,19 +275,7 @@ function build (opts) {
           .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
-            for (let i=0; i<result[0].catalog.length; i++){
-              if(result[0].catalog[i][0] === req.body.id[1]){
-                for (let j=1; j<result[0].catalog[i].length; j++){   
-                  if(result[0].catalog[i][j][0] === req.body.id[2]){
-                    for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
-                      if(result[0].catalog[i][j][1][k][1] && result[0].catalog[i][j][1][k][1].toString() === req.body.id[0][1].toString()){
-                        result[0].catalog[i][j][1][k][2] = "noDisplay" 
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            result = noDisplayNewArticle (result, req.body.id)
             MongoClient.connect(urldb)
               .then((db) => db.db("tutorialsdb"))
               .then((dbo) => {
@@ -280,28 +302,21 @@ function build (opts) {
             .then((dbo) => dbo.collection("allcatalog").find({}, {projection:{_id:0}} ).toArray())
             .catch((err) => { console.log(err, "err")})
             .then((result) => {
-              let arr = result[0].catalog
-              for (let i=0; i<result[0].catalog.length; i++){              
-                for (let j=1; j<result[0].catalog[i].length; j++){                     
-                  for (let k=0; k<result[0].catalog[i][j][1].length; k++){   
-                    console.log(result[0].catalog[i][j][1][k][1])
-                    if(result[0].catalog[i][j][1][k][1] === req.body.id){
-                      arr[i][j][1][k][3]++
-                      console.log(arr[i][j][1][k][3])
-                    }
-                  }                  
-                }            
-              }
-              MongoClient.connect(urldb)
-              .then((db) => db.db("tutorialsdb"))
-              .then((dbo) => {
-                dbo.collection("allcatalog").updateOne(
-                  {name: "name"}, { $set:{catalog: arr}});
+              let arr = countPPInAllCatalog(result, req.body.id)
+              if(arr){
+                MongoClient.connect(urldb)
+                .then((db) => db.db("tutorialsdb"))
+                .then((dbo) => {
+                  dbo.collection("allcatalog").updateOne(
+                    {name: "name"}, { $set:{catalog: arr}});
+                  })
+                .catch((err) => { console.log(err, "err")})
+                .then((result) => {
+                  reply.send(result_article)
                 })
-              .catch((err) => { console.log(err, "err")})
-              .then((result) => {
-                reply.send(result_article)
-              })
+              } else {
+                reply.send("oops")
+              }
   
             })
           })
