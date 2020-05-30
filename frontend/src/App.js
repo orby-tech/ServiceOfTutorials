@@ -15,7 +15,7 @@ import  ArticleRedactor  from './ArticleRedactor'
 import  Admin          from './Admin.tsx'
 import  CreateArticle  from './CreateArticle.tsx'
 import  GlobalFinding  from './GlobalFind'
-
+import  Download  from './Download'
 import  { Route }       from 'react-router-dom';
 import  { BrowserRouter } from 'react-router-dom';
 
@@ -51,7 +51,7 @@ function App() {
           <Route path="/ArticleRedactor/:pk" exact component={ArticleRedactor} />
           <Route path="/CreateArticle" exact component={CreateArticle} />
           <Route path="/admin" exact component={Admin} />
-
+          <Route path="/download" exact component={Download} />
           <Route path="/globalFind" exact component={GlobalFinding} />
 
           <Route exact component={Footer}/>
