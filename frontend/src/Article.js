@@ -3,12 +3,13 @@ import React, { Component }  from 'react';
 import  Service  from  './Service';
 import  Comments from './Comments';
 import { Link } from 'react-router-dom';
-
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
+import  { connect } from 'react-redux'
 
 
 const  service  =  new  Service();
 
-class Article extends Component{
+class PREArticle extends Component{
 
   constructor(props) {
     super(props);
@@ -29,7 +30,8 @@ class Article extends Component{
   componentDidMount(){
     var  self  =  this;
     let fref = 'Article'+this.state.id
-    service.getArticle({id: this.state.id}).then(function (result) {
+    const { strings, currentLanguageCode } = this.props;
+    service.getArticle({id: this.state.id, leng: currentLanguageCode }).then(function (result) {
       if(!localStorage.getItem(fref) || JSON.parse(localStorage.getItem(fref)) !== result){
         self.setState({ catalog: result })
         localStorage.setItem(fref, JSON.stringify(result))
@@ -65,6 +67,7 @@ class Article extends Component{
       this.setState({opend: params.pk});
     }
   }
+  
 
   render() {
 
@@ -84,5 +87,6 @@ class Article extends Component{
     );
   }
 }
+const Article = connect()(multilanguage(PREArticle));
 
 export default Article;
