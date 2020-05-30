@@ -36,8 +36,9 @@
 	"catalog": "Catalog",
 	"popular": "Popularest Articles",
 	"newArticles": "New Articles",
-	"find": "Find in catalog:"
+	"find": "Find in catalog:",
 
 
-
+	"footerCreate": "Cretaed and supports the project:",
+	"footerAuthor": "Bondarenko Timur"
 }
