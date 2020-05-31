@@ -43,5 +43,19 @@
 	"footerAuthor": "Bondarenko Timur",
 
 
-	"download__android": "Download native APK"
+	"download__android": "Download native APK",
+
+
+
+
+	"articleEdit": "Suggest a fix",
+
+
+
+	"comments__comments": "Comments:",
+	"comments__comment": "Comment",
+	"comments__whatname": "What's your name",
+	"comments__header": "Header",
+	"comments__commentText": "Your comment",
+	"comments__appendButton": "Append"
 }

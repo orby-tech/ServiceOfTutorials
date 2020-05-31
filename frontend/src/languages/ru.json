@@ -43,5 +43,19 @@
 	"footerAuthor": "Бондаренко Тимур",
 
 
-	"download__android": "Download native APK"
+	"download__android": "Download native APK",
+
+
+
+
+	"articleEdit": "Предложить исправление ",
+
+
+
+	"comments__comments": "Комментарии:",
+	"comments__comment": "Комментарий",
+	"comments__whatname": "Как вас зовут?",
+	"comments__header": "Заголовок",
+	"comments__commentText": "Ваш комментарий",
+	"comments__appendButton": "Добавить"
 }

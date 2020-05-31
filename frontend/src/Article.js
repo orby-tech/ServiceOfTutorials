@@ -39,8 +39,7 @@ class PREArticle extends Component{
       service.getArticle({id: self.state.id, leng:  prevProps.currentLanguageCode }).then(function (result) {  
         if ( result && result[0] ) {
           self.setState({ article: result[0].article })
-        }    
-        
+        }  
       });
     }
   }
@@ -75,7 +74,7 @@ class PREArticle extends Component{
   
 
   render() {
-
+    const { strings, currentLanguageCode } = this.props;
     return(
         <div className="article__container">
           { 
@@ -85,7 +84,7 @@ class PREArticle extends Component{
           }
 
           <Link className="article__readact btn btn-success" to={"/ArticleRedactor/"+this.state.opend}>
-            Предложить исправление
+            {strings["articleEdit"]}
           </Link>
           <Comments id={this.state.id}/>
       </div>

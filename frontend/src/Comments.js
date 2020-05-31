@@ -2,10 +2,12 @@ import  React, { Component }  from 'react';
 
 import  Service  from  './Service';
 
+
+import { multilanguage, changeLanguage, loadLanguages} from "redux-multilanguage";
+import  { connect } from 'react-redux'
+
 const  service  =  new  Service();
-
-
-class Comments extends Component{
+class PREComments extends Component{
 
   constructor(props) {
     super(props);
@@ -76,9 +78,11 @@ class Comments extends Component{
 
   render() {
     let status = localStorage.getItem('status') === "god" ? "" : "create-article__non-display" 
+    const { strings, currentLanguageCode } = this.props;
+
     return(
       <div className="comments__container">
-        <h2 className="comments__title">  Комментарии: </h2>
+        <h2 className="comments__title">  {strings["comments__comments"]} </h2>
         {
           this.state.comments.map(comment =>
             <div className="comments__block">
@@ -94,11 +98,11 @@ class Comments extends Component{
 
 
         <div className="newComment__container">
-          <h3>Комментарий</h3>
-            <input className="form-control" id="newCommentName" placeholder="Как вас звать?)"/>
-            <input className="newComment__header form-control" id="newCommentHeader" placeholder="Заголовок"/>
-            <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder="Комментарий"/>
-            <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentAppend()}> Добавить </button>	 
+          <h3>{strings["comments__comment"]}</h3>
+            <input className="form-control" id="newCommentName" placeholder={strings["comments__whatname"]}/>
+            <input className="newComment__header form-control" id="newCommentHeader" placeholder={strings["comments__header"]}/>
+            <textarea className="newComment__text form-control" id="newCommentText" type="text" placeholder={strings["comments__commentText"]}/>
+            <button className="newComment__uppend btn btn-success" onClick={() => this.newCommentAppend()}> {strings["comments__appendButton"]} </button>	 
         </div>
 
 
@@ -107,5 +111,5 @@ class Comments extends Component{
     );
   }
 }
-
+const Comments = connect()(multilanguage(PREComments));
 export default Comments;
