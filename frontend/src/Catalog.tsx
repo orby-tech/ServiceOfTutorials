@@ -36,11 +36,12 @@ class PRECatalog extends Component<{}, ParentState>{
   componentDidMount(){
     var  self  =  this;
     const { currentLanguageCode } = this.props;
+    let locName = 'catalog' + currentLanguageCode
     service.getCatalog({leng: currentLanguageCode}).then(function (result) {
-      if(!localStorage.getItem('catalog' + currentLanguageCode) 
-        || JSON.parse(localStorage.getItem('catalog' + currentLanguageCode)) !== result){
+      if(!localStorage.getItem(locName) 
+        || JSON.parse(localStorage.getItem(locName)) !== result){
         self.setState({ catalog: result })
-        localStorage.setItem('catalog' + currentLanguageCode, JSON.stringify(result))
+        localStorage.setItem(locName, JSON.stringify(result))
       }
       self.setState({ loading: false })
     });
@@ -50,14 +51,14 @@ class PRECatalog extends Component<{}, ParentState>{
     const { currentLanguageCode } = this.props;
     console.log(prevProps.currentLanguageCode , currentLanguageCode)
     if(prevProps.currentLanguageCode !== currentLanguageCode){
-      
-      if(localStorage.getItem('catalog' + prevProps.currentLanguageCode)){
-        self.setState({ catalog: JSON.parse(localStorage.getItem('catalog' + currentLanguageCode))})
+      let locName = 'catalog' + prevProps.currentLanguageCode
+      if(localStorage.getItem(locName)){
+        self.setState({ catalog: JSON.parse(localStorage.getItem(locName))})
       }
       service.getCatalog({leng: prevProps.currentLanguageCode}).then(function (result) {
         
           self.setState({ catalog: result })
-          localStorage.setItem('catalog' + prevProps.currentLanguageCode, JSON.stringify(result))
+          localStorage.setItem(locName, JSON.stringify(result))
         
         self.setState({ loading: false })
       });

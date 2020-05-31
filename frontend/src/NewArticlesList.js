@@ -13,16 +13,31 @@ const  service  =  new  Service();
 function sortfunction(a, b){
   return (a[0][3] - b[0][3])
   }
+const newArticlesSorting = (catalog) => {
+  let arr = []
+  catalog.map( global=>
+      global.splice(1).map( first => 
+          first[1].forEach( second  => {
+              if(second[1] && second[2] !== "noDisplay"){
+                      arr.push([[global[0], first[0]].concat(second)])
+              }
+          })   
+      )
+  )
+  arr.sort(sortfunction)
+  arr.reverse()
+  return arr
+}
 
 class PRENewArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
 
-    
+    const { currentLanguageCode } = this.props;
     let newArticles = []
-    if(localStorage.getItem('newArticles')){
-      newArticles = JSON.parse(localStorage.getItem('newArticles'))
+    if(localStorage.getItem('newArticles' + currentLanguageCode )){
+      newArticles = JSON.parse(localStorage.getItem('newArticles' + currentLanguageCode ))
     }
     this.state = {
       catalog: [],
@@ -35,25 +50,40 @@ class PRENewArticles extends Component{
 
   componentDidMount(){
     var  self  =  this;
-    service.getCatalog().then(function (result) {
-      self.setState({ catalog: result, loading: true })
-        let arr = []
-        self.state.catalog.map( global=>
-            global.splice(1).map( first => 
-                first[1].forEach( second  => {
-                    if(second[1] && second[2] !== "noDisplay"){
-                            arr.push([[global[0], first[0]].concat(second)])
-                    }
-                })   
-            )
-        )
-        arr.sort(sortfunction)
-        arr.reverse()
-        console.log(arr)
+    const { currentLanguageCode } = this.props;
+    service.getCatalog({ leng: currentLanguageCode }).then(function (result) {
+      if (result) {
+        self.setState({ catalog: result, loading: true })
+
+        let arr = newArticlesSorting(self.state.catalog)
         self.setState({NewArticles: arr, loading: false})
+        localStorage.setItem('newArticles' + currentLanguageCode, JSON.stringify(arr))
+      }
+
     });
   }
+  componentWillUpdate(prevProps) {
+    var  self  =  this;
+    const { currentLanguageCode } = this.props;
+    console.log(prevProps.currentLanguageCode , currentLanguageCode)
+    if(prevProps.currentLanguageCode !== currentLanguageCode){
+      let locName = 'newArticles' + currentLanguageCode
 
+      if(localStorage.getItem(locName)){
+        self.setState({ catalog: JSON.parse(localStorage.getItem(locName))})
+      }
+
+      service.getCatalog({leng: prevProps.currentLanguageCode}).then(function (result) {
+        if (result) {
+          self.setState({ catalog: result, loading: true })
+  
+          let arr = newArticlesSorting(self.state.catalog)
+          self.setState({NewArticles: arr, loading: false})
+          localStorage.setItem('newArticles' + currentLanguageCode, JSON.stringify(arr))
+        }
+      });
+    }
+  }
 
   catalog_finded(temp) {
     temp= temp.toLowerCase()
