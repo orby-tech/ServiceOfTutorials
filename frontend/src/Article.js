@@ -15,7 +15,14 @@ class PREArticle extends Component{
     super(props);
 
     const { match: { params } } = this.props;
+
     let article = []
+    const { currentLanguageCode } = this.props;
+    let fref = 'Article'+ params.pk + currentLanguageCode
+
+    if(localStorage.getItem(fref)){
+      article = JSON.parse(localStorage.getItem(fref))
+    }
     this.state = {
       article:  article,
       id: params.pk
@@ -25,10 +32,13 @@ class PREArticle extends Component{
 
   componentDidMount(){
     var  self  =  this;
-    let fref = 'Article'+this.state.id
-    const { strings, currentLanguageCode } = this.props;
-    service.getArticle({id: this.state.id, leng: currentLanguageCode }).then(function (result) {      
+    const { currentLanguageCode } = this.props;
+    let fref = 'Article'+this.state.id + currentLanguageCode
+
+    service.getArticle({id: this.state.id, leng: currentLanguageCode }).then(function (result) {    
+        
       if (result && result[0]) {
+        localStorage.setItem(fref, JSON.stringify(result[0].article))
         self.setState({ article: result[0].article })
       }  
     });
@@ -36,8 +46,14 @@ class PREArticle extends Component{
   componentWillUpdate(prevProps) {
     var  self  =  this;
     if(prevProps.currentLanguageCode !== this.props.currentLanguageCode){
+      let fref = 'Article'+ this.state.id + prevProps.currentLanguageCode
+      if(localStorage.getItem(fref)){
+        let article = JSON.parse(localStorage.getItem(fref))
+        self.setState({ article: article })
+      }
       service.getArticle({id: self.state.id, leng:  prevProps.currentLanguageCode }).then(function (result) {  
         if ( result && result[0] ) {
+          localStorage.setItem(fref, JSON.stringify(result[0].article))
           self.setState({ article: result[0].article })
         }  
       });
