@@ -8,7 +8,7 @@ export default class Service{
 	}
 	getArticle(raw) {
 		const url = `${API_URL}/article`;
-		return axios.post(url, raw).then(response => response.data[0].article);
+		return axios.post(url, raw).then(response => response.data);
 	}	
 	
 	getRedactions() {

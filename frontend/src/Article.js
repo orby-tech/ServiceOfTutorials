@@ -28,14 +28,19 @@ class PREArticle extends Component{
     let fref = 'Article'+this.state.id
     const { strings, currentLanguageCode } = this.props;
     service.getArticle({id: this.state.id, leng: currentLanguageCode }).then(function (result) {      
-        self.setState({ article: result })
+      if (result && result[0]) {
+        self.setState({ article: result[0].article })
+      }  
     });
   }
   componentWillUpdate(prevProps) {
     var  self  =  this;
     if(prevProps.currentLanguageCode !== this.props.currentLanguageCode){
-      service.getArticle({id: self.state.id, leng:  prevProps.currentLanguageCode }).then(function (result) {      
-        self.setState({ article: result })
+      service.getArticle({id: self.state.id, leng:  prevProps.currentLanguageCode }).then(function (result) {  
+        if ( result && result[0] ) {
+          self.setState({ article: result[0].article })
+        }    
+        
       });
     }
   }
