@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:8000';
 export default class Service{
 	getCatalog() {
 		const url = `${API_URL}/allcatalog`;
-		return axios.get(url).then(response => response.data);
+		return axios.post(url).then(response => response.data);
 	}
 	getArticle(raw) {
 		const url = `${API_URL}/article`;
