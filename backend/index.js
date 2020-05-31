@@ -140,9 +140,13 @@ function build (opts) {
       method: 'POST',
       url: '/allcatalog',
       handler: (req, reply) => {
+        let collection = "allcatalog"
+        if (req.body.leng === "en"){
+          collection = "allcatalogEN"
+        }
         MongoClient.connect(urldb)
           .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("allcatalog").find({}).toArray())
+          .then((dbo) => dbo.collection(collection).find({}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result) => {
             reply.send(result[0].catalog)

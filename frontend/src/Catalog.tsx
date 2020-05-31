@@ -21,7 +21,7 @@ class PRECatalog extends Component<{}, ParentState>{
   
   constructor(props) {
     super(props);
-    const { strings, currentLanguageCode } = this.props;
+    const { currentLanguageCode } = this.props;
     
     let catalog : any [] = []
     if(localStorage.getItem('catalog' + currentLanguageCode)){
@@ -35,9 +35,10 @@ class PRECatalog extends Component<{}, ParentState>{
   }
   componentDidMount(){
     var  self  =  this;
-    const { strings, currentLanguageCode } = this.props;
-    service.getCatalog().then(function (result) {
-      if(!localStorage.getItem('catalog' + currentLanguageCode) || JSON.parse(localStorage.getItem('catalog' + currentLanguageCode)) !== result){
+    const { currentLanguageCode } = this.props;
+    service.getCatalog({leng: currentLanguageCode}).then(function (result) {
+      if(!localStorage.getItem('catalog' + currentLanguageCode) 
+        || JSON.parse(localStorage.getItem('catalog' + currentLanguageCode)) !== result){
         self.setState({ catalog: result })
         localStorage.setItem('catalog' + currentLanguageCode, JSON.stringify(result))
       }
@@ -46,13 +47,15 @@ class PRECatalog extends Component<{}, ParentState>{
   }
   componentWillUpdate(prevProps) {
     var  self  =  this;
-    const { strings, currentLanguageCode } = this.props;
-    if(prevProps.currentLanguageCode !== this.props.currentLanguageCode){
-      service.getCatalog().then(function (result) {
-        if(!localStorage.getItem('catalog' + currentLanguageCode) || JSON.parse(localStorage.getItem('catalog' + currentLanguageCode)) !== result){
+    const { currentLanguageCode } = this.props;
+    console.log(prevProps.currentLanguageCode , currentLanguageCode)
+    if(prevProps.currentLanguageCode !== currentLanguageCode){
+      console.log(prevProps.currentLanguageCode)
+      service.getCatalog({leng: prevProps.currentLanguageCode}).then(function (result) {
+        
           self.setState({ catalog: result })
-          localStorage.setItem('catalog' + currentLanguageCode, JSON.stringify(result))
-        }
+          localStorage.setItem('catalog' + prevProps.currentLanguageCode, JSON.stringify(result))
+        
         self.setState({ loading: false })
       });
     }

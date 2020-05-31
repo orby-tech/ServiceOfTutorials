@@ -2,9 +2,9 @@ import axios from 'axios';
 const API_URL = 'http://localhost:8000';
 
 export default class Service{
-	getCatalog() {
+	getCatalog(raw) {
 		const url = `${API_URL}/allcatalog`;
-		return axios.post(url).then(response => response.data);
+		return axios.post(url, raw).then(response => response.data);
 	}
 	getArticle(raw) {
 		const url = `${API_URL}/article`;
