@@ -291,9 +291,14 @@ function build (opts) {
       method: 'POST',
       url: '/article',
       handler: (req, reply) => {
+        let collection = "tutorials"
+        if (req.body.leng === "en"){
+          collection = "tutorialsEN"
+        }
+        console.log(req.body.leng)
         MongoClient.connect(urldb)
           .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("tutorials").find({id: req.body.id}).toArray())
+          .then((dbo) => dbo.collection(collection).find({id: req.body.id}).toArray())
           .catch((err) => { console.log(err, "err")})
           .then((result_article) => {
 

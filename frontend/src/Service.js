@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://api.tutorials.getteam.space';
+const API_URL = 'http://localhost:8000';
 
 export default class Service{
 	getCatalog() {
