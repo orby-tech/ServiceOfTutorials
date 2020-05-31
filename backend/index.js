@@ -452,7 +452,7 @@ if (require.main === module) {
   MongoClient.connect(urldb, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
-    fastify.listen(8000, err => {
+    fastify.listen(10000, err => {
       if (err) throw err
       console.log(`Server listening at http://localhost:${fastify.server.address().port}`)
       db.close();
