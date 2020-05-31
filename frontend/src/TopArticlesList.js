@@ -11,19 +11,32 @@ const  service  =  new  Service();
 
 
 function sortfunction(a, b){
-  //Тут можно сказать, что сравнивается a и b, и возвращается -1, 0 или 1.
   return (a[0][5] - b[0][5])
-  }
-
+}
+const topArticlesSorting = (catalog) => {
+  let arr = []
+  catalog.map( global=>
+    global.splice(1).map( first => 
+        first[1].forEach( second  => {
+            if(second[1] && second[2] !== "noDisplay" && second[3] >= 0){
+                    arr.push([[global[0], first[0]].concat(second)])
+            }
+        })   
+    )
+)
+arr.sort(sortfunction)
+arr.reverse()
+  return arr
+}
 class PRETopArticles extends Component{
   constructor(props) {
     super(props);
     this.findClick = this.findClick.bind(this)
 
-
+    const { currentLanguageCode } = this.props;
     let topArticles = []
-    if(localStorage.getItem('topArticles')){
-      topArticles = JSON.parse(localStorage.getItem('topArticles'))
+    if(localStorage.getItem('topArticles' + currentLanguageCode)){
+      topArticles = JSON.parse(localStorage.getItem('topArticles' + currentLanguageCode))
     }
     this.state = {
       catalog: [],
@@ -35,33 +48,36 @@ class PRETopArticles extends Component{
 
 
   componentDidMount(){
+    const { currentLanguageCode } = this.props;
     var  self  =  this;
-    service.getCatalog().then(function (result) {
-      if ( !localStorage.getItem('catalog') 
-        || !localStorage.getItem('topArticles') 
-        || JSON.parse(localStorage.getItem('catalog')) !== result){
-        self.setState({ catalog: result ,loading: true})
-        localStorage.setItem('catalog', JSON.stringify(result))
-          let arr = []
-          self.state.catalog.map( global=>
-              global.splice(1).map( first => 
-                  first[1].forEach( second  => {
-                      if(second[1] && second[2] !== "noDisplay" && second[3] >= 0){
-                              arr.push([[global[0], first[0]].concat(second)])
-                      }
-                  })   
-              )
-          )
-          arr.sort(sortfunction)
-          arr.reverse()
-          self.setState({topArticles: arr, loading:false})
-          localStorage.setItem('topArticles', JSON.stringify(arr))
-        } else {
-          self.setState({topArticles: JSON.parse(localStorage.getItem('topArticles'))})
-        }
+    service.getCatalog({ leng: currentLanguageCode }).then(function (result) {
+      self.setState({ catalog: result ,loading: true})
+      localStorage.setItem('catalog', JSON.stringify(result))
+        let arr = topArticlesSorting(result)
+        self.setState({topArticles: arr, loading:false})
+        localStorage.setItem('topArticles' + currentLanguageCode, JSON.stringify(arr))
     });
   }
+  componentWillUpdate(prevProps) {
+    var  self  =  this;
+    const { currentLanguageCode } = this.props;
+    if(prevProps.currentLanguageCode !== currentLanguageCode){
+      let locName = 'topArticles' + prevProps.currentLanguageCode
+      if(localStorage.getItem(locName)){
+        self.setState({ catalog: JSON.parse(localStorage.getItem(locName))})
+      }
 
+      service.getCatalog({leng: prevProps.currentLanguageCode}).then(function (result) {
+        if (result) {
+          self.setState({ catalog: result, loading: true })
+  
+          let arr = topArticlesSorting(self.state.catalog)
+          self.setState({topArticles: arr, loading: false})
+          localStorage.setItem(locName, JSON.stringify(arr))
+        }
+      });
+    }
+  }
 
   catalog_finded(temp) {
     temp= temp.toLowerCase()
