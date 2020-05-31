@@ -50,7 +50,10 @@ class PRECatalog extends Component<{}, ParentState>{
     const { currentLanguageCode } = this.props;
     console.log(prevProps.currentLanguageCode , currentLanguageCode)
     if(prevProps.currentLanguageCode !== currentLanguageCode){
-      console.log(prevProps.currentLanguageCode)
+      
+      if(localStorage.getItem('catalog' + prevProps.currentLanguageCode)){
+        self.setState({ catalog: JSON.parse(localStorage.getItem('catalog' + currentLanguageCode))})
+      }
       service.getCatalog({leng: prevProps.currentLanguageCode}).then(function (result) {
         
           self.setState({ catalog: result })
