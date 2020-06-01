@@ -46,6 +46,59 @@ module.exports.updateCatalog = function(arr, leng) {
   })
 }
 
+module.exports.deleteComment = function (comment) {
+  return new Promise ((resolve,reject) => {
+    MongoClient.connect(urldb)
+    .then((db) => db.db("tutorialsdb"))
+    .then((dbo) => dbo.collection("comments").deleteOne({id: comment.id, date: comment.date}))
+    .catch((err) => { console.log(err, "err")})
+    .then((result) => {
+      resolve(result)
+    })
+  })
+}
+
+module.exports.getComments = function (id) {
+  return new Promise ((resolve,reject) => {
+    MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("comments").find({id: id}, {projection:{_id:0}}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result) => { resolve(result) })
+  })
+}
+
+module.exports.pushComment = function (body) {
+  return new Promise ((resolve, reject) =>{
+    let arr = ({
+      id: body.articleId,
+      header: body.header,
+      text: body.text,
+      author: body.name,
+      date: Date.now()
+    })
+    MongoClient.connect(urldb)
+    .then((db) => db.db("tutorialsdb"))
+    .then((dbo) => dbo.collection("comments").insertOne(arr))
+    .catch((err) => { console.log(err, "err")})
+    .then((result) => { resolve(result) })
+  })
+}
+
+module.exports.pushRedactionArticle = function (body) {
+  return new Promise ((resolve, reject) => {
+    let arr = ({
+      id: body.id,
+      article: body.article
+    })
+    MongoClient.connect(urldb)
+    .then((db) => db.db("tutorialsdb"))
+    .then((dbo) => dbo.collection("redactions").insertOne(arr))
+    .catch((err) => { console.log(err, "err")})
+    .then((result) => resolve(result))
+  })
+}
+
 module.exports.noDisplayNewArticle = function ( result, id ) {
   for (let i=0; i<result[0].catalog.length; i++){
     if(result[0].catalog[i][0] === req.body.id[1]){

@@ -202,10 +202,8 @@ function build (opts) {
       method: 'POST',
       url: '/article',
       handler: (req, reply) => {
-        f.getArticle(req.body.leng, req.body.id)
-          .then((result_article) => {
-        f.getCatalog(req.body.leng)
-          .then((result) => {
+        f.getArticle(req.body.leng, req.body.id).then((result_article) => {
+        f.getCatalog(req.body.leng).then((result) => {
         let arr = f.countPPInAllCatalog(result, req.body.id)
         if(arr){
           f.updateCatalog(arr, "ru")
@@ -223,64 +221,29 @@ function build (opts) {
       method: 'POST',
       url: '/redactorArticleAppend',
       handler: (req, reply) => {
-        let arr = ({
-          id: req.body.id,
-          article: req.body.article
-        })
-        MongoClient.connect(urldb)
-        .then((db) => db.db("tutorialsdb"))
-        .then((dbo) => dbo.collection("redactions").insertOne(arr))
-        .catch((err) => { console.log(err, "err")})
-        .then((result) => {
-          reply.send()
-        })
+        f.pushRedactionArticle(req.body)
+        .then((result) => reply.send())
       }
     })
     fastify.route({
       method: 'POST',
       url: '/comments',
       handler: (req, reply) => {
-        MongoClient.connect(urldb)
-          .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("comments").find({id: req.body.id}, {projection:{_id:0}}).toArray())
-          .catch((err) => { console.log(err, "err")})
-          .then((result) => {
-            reply.send(result)
-          })
+        f.getComments(req.body.id).then((result) => { reply.send(result) })
       }
     })    
     fastify.route({
       method: 'POST',
       url: '/deletecomment',
       handler: (req, reply) => {
-        MongoClient.connect(urldb)
-          .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("comments").deleteOne({id:req.body.comment.id, date: req.body.comment.date}))
-          .catch((err) => { console.log(err, "err")})
-          .then((result) => {
-            reply.send(result)
-          })
+        f.deleteComment(req.body.comment).then((result) => { reply.send(result) })
       }
     })    
     fastify.route({
       method: 'POST',
       url: '/appendcomment',
       handler: (req, reply) => {
-
-            let arr = ({
-              id: req.body.articleId,
-              header: req.body.header,
-              text: req.body.text,
-              author: req.body.name,
-              date: Date.now()
-            })
-            MongoClient.connect(urldb)
-            .then((db) => db.db("tutorialsdb"))
-            .then((dbo) => dbo.collection("comments").insertOne(arr))
-            .catch((err) => { console.log(err, "err")})
-            .then((result) => {
-              reply.send()
-            })
+        f.pushComment(req.body).then((result) => {reply.send(result)})
       }
     }) 
 
@@ -295,16 +258,14 @@ function build (opts) {
           article: req.body.article
         }        
         console.log(tutorial)
-        f.getCatalog("ru")
-            .then((result) => {
-        result = f.pushNewArticle(result, req.body.type, req.body.under_type, tutorial)
-        
-        if (result) {
-          f.updateCatalog(result, "ru")
-              .then(reply.send(JSON.stringify("finded")))
-        } else {
-          reply.send("oops")
-        }
+        f.getCatalog("ru").then((result) => {
+          result = f.pushNewArticle(result, req.body.type, req.body.under_type, tutorial)
+          
+          if (result) {
+            f.updateCatalog(result, "ru").then(reply.send(JSON.stringify("finded")))
+          } else {
+            reply.send("oops")
+          }
         })
       }
     })
