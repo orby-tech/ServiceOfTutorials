@@ -1,0 +1,24 @@
+"filename", "language", "TypeScript React", "JSON", "JavaScript", "TypeScript", "comment", "blank", "total"
+"/home/oem/React/ServiceOfTutorials/native/.expo-shared/assets.json", "JSON", 0, 4, 0, 0, 0, 1, 5
+"/home/oem/React/ServiceOfTutorials/native/About.tsx", "TypeScript React", 65, 0, 0, 0, 0, 14, 79
+"/home/oem/React/ServiceOfTutorials/native/App.tsx", "TypeScript React", 27, 0, 0, 0, 0, 16, 43
+"/home/oem/React/ServiceOfTutorials/native/Article.tsx", "TypeScript React", 51, 0, 0, 0, 0, 7, 58
+"/home/oem/React/ServiceOfTutorials/native/ArticlesBlock.tsx", "TypeScript React", 66, 0, 0, 0, 0, 5, 71
+"/home/oem/React/ServiceOfTutorials/native/Catalog.tsx", "TypeScript React", 246, 0, 0, 0, 0, 23, 269
+"/home/oem/React/ServiceOfTutorials/native/CatalogList.tsx", "TypeScript React", 36, 0, 0, 0, 0, 5, 41
+"/home/oem/React/ServiceOfTutorials/native/Content.tsx", "TypeScript React", 34, 0, 0, 0, 0, 4, 38
+"/home/oem/React/ServiceOfTutorials/native/NavBar.tsx", "TypeScript React", 105, 0, 0, 0, 0, 19, 124
+"/home/oem/React/ServiceOfTutorials/native/NavBarList.tsx", "TypeScript React", 56, 0, 0, 0, 0, 11, 67
+"/home/oem/React/ServiceOfTutorials/native/NewArticles.tsx", "TypeScript React", 106, 0, 0, 0, 0, 20, 126
+"/home/oem/React/ServiceOfTutorials/native/Service.ts", "TypeScript", 0, 0, 0, 72, 0, 10, 82
+"/home/oem/React/ServiceOfTutorials/native/TopArticles.tsx", "TypeScript React", 103, 0, 0, 0, 0, 16, 119
+"/home/oem/React/ServiceOfTutorials/native/TopicsList.tsx", "TypeScript React", 37, 0, 0, 0, 0, 6, 43
+"/home/oem/React/ServiceOfTutorials/native/app.json", "JSON", 0, 22, 0, 0, 8, 0, 30
+"/home/oem/React/ServiceOfTutorials/native/babel.config.js", "JavaScript", 0, 0, 6, 0, 0, 1, 7
+"/home/oem/React/ServiceOfTutorials/native/package-lock.json", "JSON", 0, 6602, 0, 0, 0, 1, 6603
+"/home/oem/React/ServiceOfTutorials/native/package.json", "JSON", 0, 31, 0, 0, 0, 1, 32
+"/home/oem/React/ServiceOfTutorials/native/redux/actions.ts", "TypeScript", 0, 0, 0, 25, 0, 2, 27
+"/home/oem/React/ServiceOfTutorials/native/redux/rootReducer.ts", "TypeScript", 0, 0, 0, 32, 1, 4, 37
+"/home/oem/React/ServiceOfTutorials/native/redux/types.ts", "TypeScript", 0, 0, 0, 4, 0, 0, 4
+"/home/oem/React/ServiceOfTutorials/native/tsconfig.json", "JSON", 0, 12, 0, 0, 0, 1, 13
+"Total", "-", 932, 6671, 6, 133, 9, 167, 7918

@@ -3,7 +3,7 @@
 const Fastify = require('fastify')
 const f = require('./functions')
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://185.20.225.204:27017/";
+var urldb = "mongodb://185-20-225-204.ovz.vps.regruhosting.ru:27017/";
 
 
 
