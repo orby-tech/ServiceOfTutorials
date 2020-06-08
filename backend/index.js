@@ -3,7 +3,7 @@
 const Fastify = require('fastify')
 const f = require('./functions')
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://185-20-225-204.ovz.vps.regruhosting.ru:27017/";
+var urldb = "mongodb://localhost:27017/";
 
 
 
@@ -106,7 +106,7 @@ function build (opts) {
       method: 'POST',
       url: '/allcatalog',
       handler: (req, reply) => {
-        f.getCatalog( req.body.leng ).then( (result) => reply.send( result ))
+        f.getCatalog( req.body.leng ).then( (result) => {console.log(result); reply.send( result )})
       }
     })
     fastify.route({
@@ -206,7 +206,7 @@ function build (opts) {
         f.getCatalog(req.body.leng).then((result) => {
         let arr = f.countPPInAllCatalog(result, req.body.id)
         if(arr){
-          f.updateCatalog(arr, "ru")
+          f.updateCatalog(arr, req.body.leng)
             .then((result) => {
             reply.send(result_article)
           })

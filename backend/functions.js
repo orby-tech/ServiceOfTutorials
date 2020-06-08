@@ -1,6 +1,6 @@
 
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://185-20-225-204.ovz.vps.regruhosting.ru/:27017/";
+var urldb = "mongodb://localhost:27017/";
 
 
 module.exports.getCatalog = function (leng) {
@@ -10,11 +10,12 @@ module.exports.getCatalog = function (leng) {
       if (leng === "en"){
         collection = "allcatalogEN"
       }
+      console.log(collection)
       MongoClient.connect(urldb)
         .then((db) => db.db("tutorialsdb"))
-        .then((dbo) => dbo.collection(collection).find({}).toArray())
+        .then((dbo) => dbo.collection(collection).find({name: "name"}).toArray())        
+        .then((result) => {console.log(result); resolve(result[0].catalog)})
         .catch((err) => { console.log(err, "err")})
-        .then((result) => resolve(result[0].catalog))
     }
   )
 }
@@ -28,17 +29,21 @@ module.exports.getArticle = function(leng, id){
     MongoClient.connect(urldb)
       .then((db) => db.db("tutorialsdb"))
       .then((dbo) => dbo.collection(collection).find({id: id}).toArray())
-      .catch((err) => { console.log(err, "err")})
       .then((result_article) => resolve(result_article))
+      .catch((err) => { console.log(err, "err")})
   })
 }
 
 module.exports.updateCatalog = function(arr, leng) {
   return new Promise ((resolve, reject) => {
+    let collection = "allcatalog"
+      if (leng === "en"){
+        collection = "allcatalogEN"
+      }
     MongoClient.connect(urldb)
     .then((db) => db.db("tutorialsdb"))
     .then((dbo) => {
-      dbo.collection("allcatalog").updateOne(
+      dbo.collection(collection).updateOne(
         {name: "name"}, { $set:{catalog: arr}});
       })
     .catch((err) => { console.log(err, "err")})
