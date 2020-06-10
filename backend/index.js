@@ -113,30 +113,17 @@ function build (opts) {
       method: 'GET',
       url: '/redactions',
       handler: (req, reply) => {
-        MongoClient.connect(urldb)
-          .then((db) => db.db("tutorialsdb"))
-          .then((dbo) => dbo.collection("redactions").find({}, {projection:{_id:0}}).toArray())
-          .catch((err) => { console.log(err, "err")})
-          .then((result) => {
-            if(result[0]){
-              MongoClient.connect(urldb)
-              .then((db) => db.db("tutorialsdb"))
-              .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
-              .catch((err) => { console.log(err, "err")})
-              .then((result_article) => {
-                
-                  reply.send({
-                    id: result[0].id,
-                    article: result_article[0].article,
-                    newArticle: result[0].article
-                  })
-                
-
-              })
-            } else (
-              reply.send("no")
-            )
-          })
+        f.getRedactions().then((result) => {
+          if(result !== "no" ){
+            reply.send({
+              id: result.id,
+              article: result.article,
+              newArticle: result.newArticle
+            })
+          } else (
+            reply.send("no")
+          )
+        })
       }
     })
 
@@ -144,7 +131,6 @@ function build (opts) {
       method: 'POST',
       url: '/redactionAppdate',
       handler: (req, reply) => {
-        console.log(req.body)
         MongoClient.connect(urldb)
           .then((db) => db.db("tutorialsdb"))
           .then((dbo) => {

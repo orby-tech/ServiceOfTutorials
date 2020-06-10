@@ -1,0 +1,387 @@
+%centering {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%border__twenty{
+  padding: 20px;
+  border: 1px solid rgba(205, 133, 63, 0.3);
+  border-radius: 20px;
+}
+
+body{
+  font-family: Montserrat;
+
+}
+.App {
+  text-align: center;
+}
+
+.start__global{
+  @extend %centering;
+  max-width: 600px;
+}
+.start__ol{
+  @extend %centering;
+  width: auto;
+}
+.catalog{
+  @extend %centering;
+}
+.catalog__container{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.catalog_global-level {
+  margin-top: 20px; 
+  margin-left: 20px;
+  min-width: 300px;
+  max-width: 380px;
+  height: auto;
+  display: inline-grid; 
+
+
+  @extend %border__twenty;
+}
+@media screen and (max-width: 800px) {
+  .catalog__container{
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+@media screen and (max-width: 400px) {
+  .catalog__container{
+    display: grid; 
+    grid-template-columns: 1fr;
+  }
+  .catalog_global-level{
+    margin-left: 0px;
+  }
+
+}
+
+
+.catalog_first-level{
+  display: block;
+  margin: 20px; 
+  width: auto;
+  float: left;
+}
+.catalog__second-level-unmod {
+  opacity: .3;
+}
+.catalog__reit{
+  opacity: .3;
+  float: right;
+}
+.catalog__second-level-delete {
+  display: none;
+}
+.catalog__finded-style {
+  background-color: yellow;
+}
+.catalog__header-find-group{
+  display: inline-block;
+  width: 200px;
+}
+.catalog__input-find-group{
+  display: inline-block;
+  width: 200px ;
+}
+.catalog__button-find-group{
+  display: inline-block;
+  width: 100px;
+}
+.article__code {
+  text-align: left;
+  padding: 30px;
+  color:  yellow;
+  background-color: rgb(47, 79, 79);
+  border-radius: 5px;
+}
+.article__text {
+  font-size: 120%;
+  padding: 15px; 
+}
+.article__header {
+  font-size: 180%;
+}
+.article__link {
+  font-size: 120%;
+  text-align: right;
+  padding: 10px;
+  color:  yellow;
+  background-color: rgba(205, 133, 63, 0.5);
+  border-radius: 5px;
+  margin-left: 45px;
+}
+.article__container {
+  @extend %centering;
+
+  max-width: 600px;
+}
+.article__readact {
+  float: right;
+  margin-top: 20px;
+}
+.article__appendButton {
+  width: 30px;
+  margin-top: 40px;
+}
+.article__delButton {
+  width: 20px;
+  float: right;
+  margin-top: -25px;
+
+}
+.article__editButton {
+  width: 20px;
+  margin-top: -25px;
+  float: right;
+  margin-right: 20px;
+}
+
+.create-article__container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+.create-article__non-display {
+  display: none;
+}
+
+.create-article__create-button {
+  height: 38px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+}
+.create-article__uppend-button{
+  height: 38px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+  margin-top: 50px;
+}
+.create-article__input {
+  margin-bottom: 10px;
+}
+.create-article__editButton {
+  float: right;
+  height: 20px;
+  width: 20px;
+  margin-top: 15px;
+}
+
+.create-article__delButton {
+  float:right;
+  height: 20px;
+  width: 20px;
+  margin-top: 15px;
+}
+.create-article__block {
+  width: 90%;
+  float: left;
+}
+.create-article__article-element {
+  border: 1px solid gray;
+  display: block;
+}
+.create-article__redaction-article-block {
+  margin:40px;
+  @extend %border__twenty;
+
+}
+
+
+
+
+.admin__container { 
+  @extend %centering;
+
+  max-width: 600px;
+}
+.admin__nonDisplay {
+  display: none;
+}
+.admin__selector {
+  width: 50px;
+}
+.admin__grade {
+  width: 100%;
+  height: 10px;
+}
+
+.adminRedactions__selectedArticle {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1vw;
+  min-width: 800px;
+}
+
+
+
+
+.cssload-container {
+  width: 100%;
+  height: 294px;
+  text-align: center;
+}
+
+.cssload-zenith {
+  width: 294px;
+  height: 294px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  box-shadow: 18px 18px 6px rgb(0,0,0);
+  animation: cssload-spin 690ms infinite linear;
+    -o-animation: cssload-spin 690ms infinite linear;
+    -ms-animation: cssload-spin 690ms infinite linear;
+    -webkit-animation: cssload-spin 690ms infinite linear;
+    -moz-animation: cssload-spin 690ms infinite linear;
+}
+
+.newArticlesList__article{
+  @extend %centering;
+  @extend %border__twenty;
+
+  width: 500px;
+  min-height: 70px;
+  padding: 10px;
+  background-color: rgba(92, 161, 156, 0.2) ;
+  margin-top: 10px;
+
+}
+.newArticlesList__link{
+  margin-top: 10px;
+  font-size: 140%;
+}
+.newArticlesList__context {
+  text-align: right;
+  opacity: 0.5;
+}
+
+.structure__container{
+  display: grid;
+
+  grid-template-columns: 100px auto;
+  grid-gap: 1vw;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+.structure__type {
+  width: 300px;
+  display: inline-block;
+}
+.structure__typeButton{
+  width: 100px;
+  height: 100%;
+  float: left;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+.structure__underType {
+  display: block;
+}
+.structure__block {
+  margin-top: 20px;
+}
+
+
+.comments__container {
+  margin-top: 40px;
+}
+
+.comments__title {
+  text-align: left;
+  opacity: 0.4;
+}
+.comments__block {
+  max-width: 600px;
+  @extend %border__twenty;
+  margin-bottom: 20px;
+}
+.comments__header {
+  margin-left: 30px;
+  float: left;
+  display: inline;
+  opacity: 0.7;
+}
+.comments__date {
+  margin-right: 30px;
+  opacity: 0.3;
+  float: right;
+  display: inline;
+}
+.comments__text {
+  width: 100%;
+  display: block;
+  text-align: left;
+  padding: 30px;
+}
+.comments__author {
+  text-align: right;
+  margin-right: 30px;
+  opacity: 0.3;
+}
+.comments__uppend {
+  height: 50px;
+  padding: 13px;
+  background-color: #EABDBD;
+  width: 100%;
+  @extend %border__twenty;
+}
+.newComment__container {
+  padding: 30px;
+}
+.newComment__text{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+.newComment__header {
+  margin-top: 4px;
+}
+.newComment__uppend {
+  float: right;
+  width: 200px;
+}
+.download__element {
+  display: inline-block;
+  @extend %centering;
+  @extend %border__twenty;
+}
+.download__androidIMG {
+  width: 500px;
+}
+
+
+
+@keyframes cssload-spin {
+  100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-o-keyframes cssload-spin {
+  100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-ms-keyframes cssload-spin {
+  100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-webkit-keyframes cssload-spin {
+  100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-moz-keyframes cssload-spin {
+  100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}

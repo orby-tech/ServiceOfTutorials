@@ -104,6 +104,60 @@ module.exports.pushRedactionArticle = function (body) {
   })
 }
 
+module.exports.getRedactions = function (body) {
+  return new Promise ((resolve, reject) => {
+    MongoClient.connect(urldb)
+      .then((db) => db.db("tutorialsdb"))
+      .then((dbo) => dbo.collection("redactions").find({}, {projection:{_id:0}}).toArray())
+      .catch((err) => { console.log(err, "err")})
+      .then((result) => {
+        if(result[0]){
+          MongoClient.connect(urldb)
+          .then((db) => db.db("tutorialsdb"))
+          .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
+          .catch((err) => { console.log(err, "err")})
+          .then((result_article) => {            
+            resolve({
+                id: result[0].id,
+                article: result_article[0].article,
+                newArticle: result[0].article
+              })
+          })
+        } else (
+          resolve("no")
+        )
+      })
+  })
+}
+
+
+
+MongoClient.connect(urldb)
+  .then((db) => db.db("tutorialsdb"))
+  .then((dbo) => dbo.collection("redactions").find({}, {projection:{_id:0}}).toArray())
+  .catch((err) => { console.log(err, "err")})
+  .then((result) => {
+    if(result[0]){
+      MongoClient.connect(urldb)
+      .then((db) => db.db("tutorialsdb"))
+      .then((dbo) => dbo.collection("tutorials").find({id: result[0].id }, {projection:{_id:0}}).toArray())
+      .catch((err) => { console.log(err, "err")})
+      .then((result_article) => {
+        
+        resolve({
+            id: result[0].id,
+            article: result_article[0].article,
+            newArticle: result[0].article
+          })
+        
+
+      })
+    } else (
+      resolve("no")
+    )
+  })
+
+
 module.exports.noDisplayNewArticle = function ( result, id ) {
   for (let i=0; i<result[0].catalog.length; i++){
     if(result[0].catalog[i][0] === req.body.id[1]){

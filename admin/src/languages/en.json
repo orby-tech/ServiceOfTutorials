@@ -1,0 +1,61 @@
+{
+	"aboutTitle": "About",
+	"about0Text": "U must haven't opinion that it book with fundamentally knowledges.",
+	"about1Text": "Articles where is knowledges to easy start in IT.",
+
+	"about0Header": "You will not become a professional on these articles!",
+	"about10Text": "But u can do first step, and open new wey",
+	"about1Header": "It's web-site is not student book!",
+	"about12Text": "Of course, I try do cool and widthly.",
+	"about13Text": "But it's format have a minuses, I know it",
+	
+	"about2Header": "And, I want you to know them too:",
+	"about0list": "Lack of information",
+	"about1list": "Necessity of addition",
+	"about2list": "Not detailed",
+	"about3list": "I will be glad to complement and expand this database",
+	"about4list": "I will be glad to know about the errors",
+
+	"about3Header": "Start now!",
+	"about0link": "Catalog mini-articles",
+	"about1link": "Popularest articles",
+	"about2link": "New articles",
+
+
+
+
+ 	"navBarTitle": "combine of start info",
+
+	"navBarAbout": "About",
+	"navBarCatalog": "Catalog",
+	"navBarTop": "Popularest articles",
+	"navBarNew": "New Articles",
+	"navBarWrite":	"Write new article",	
+	"navBarDownload":	"Download android version",
+
+	"catalog": "Catalog",
+	"popular": "Popularest Articles",
+	"newArticles": "New Articles",
+	"find": "Find in catalog:",
+
+
+	"footerCreate": "Cretaed and supports the project:",
+	"footerAuthor": "Bondarenko Timur",
+
+
+	"download__android": "Download native APK",
+
+
+
+
+	"articleEdit": "Suggest a fix",
+
+
+
+	"comments__comments": "Comments:",
+	"comments__comment": "Comment",
+	"comments__whatname": "What's your name",
+	"comments__header": "Header",
+	"comments__commentText": "Your comment",
+	"comments__appendButton": "Append"
+}
