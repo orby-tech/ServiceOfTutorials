@@ -112,7 +112,13 @@ class PRENavBar extends Component{
                         className="nav-link"
                         to="/CreateArticle"> {strings["navBarWrite"]}
                   </Link>
-                </li>    
+                </li>                    
+                <li className="nav-item" id="navBar">
+                  <Link onClick={this.toggleNavbar} 
+                        className="nav-link"
+                        to="/admin"> admin panel
+                  </Link>
+                </li> 
                 <li className="nav-item" id="navBar">
                   <Link onClick={this.toggleNavbar} 
                         className="nav-link"
