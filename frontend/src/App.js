@@ -49,8 +49,6 @@ function App() {
           <Route path="/toparticles" exact component={TopArticles} />          
           <Route path="/Article/:pk" exact component={Article} />
           <Route path="/ArticleRedactor/:pk" exact component={ArticleRedactor} />
-          <Route path="/CreateArticle" exact component={CreateArticle} />
-          <Route path="/admin" exact component={Admin} />
           <Route path="/download" exact component={DownloadComponent} />
           <Route path="/globalFind" exact component={GlobalFinding} />
 
