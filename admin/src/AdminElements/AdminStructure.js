@@ -28,7 +28,7 @@ class AdminStructure extends Component{
   componentDidMount(){
     var  self  =  this;
     let temp_arr = []
-    service.getCatalog().then(function (result) {
+    service.getCatalog({leng: "ru"}).then(function (result) {
       let arr = []
       result.forEach(global => {
         temp_arr = []

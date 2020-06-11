@@ -28,7 +28,8 @@ class AdminNewArticles extends Component{
   }
   componentDidMount(){
     var  self  =  this;
-    service.getCatalog().then(function (result) {
+    service.getCatalog({leng: "ru"}).then(function (result) {
+      console.log(result[0].article)
       let arr = []
       for (let i=0; i<result.length; i++){
         for (let j=1; j<result[i].length; j++){  

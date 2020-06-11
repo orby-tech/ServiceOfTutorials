@@ -39,7 +39,7 @@ class CreateArticle extends Component<{}, ParentState>{
   }
   componentDidMount(){
     var  self  =  this;
-    service.getCatalog().then(function (result) {
+    service.getCatalog({leng: "ru"}).then(function (result) {
       self.setState({ catalog: result, loading: false })
     })
 
